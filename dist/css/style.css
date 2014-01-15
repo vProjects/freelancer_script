@@ -1,0 +1,183 @@
+@charset "utf-8";
+/* CSS Document */
+/*
+	Vyrazu Labs
+	Author: Dipanjan Bagchi
+	Email: dipanjan@vyrazu.com
+*/
+
+/* CSS For Tags */
+body{
+	background-color:#E5E5E5;
+	margin:0px;
+	font-size:1.10em;
+	font-family:Arial, Helvetica, sans-serif;
+}
+p{
+	font-size:1.2em;
+	line-height:20px;
+	text-align:justify;
+}
+
+/* CSS For Bootstrap */
+.row{
+	margin:0px;
+}
+
+
+/* Login Page CSS */
+.header_outline{
+	top:0;
+	background-color:#262626;
+	left: 0;
+	right: 0;
+	position: fixed;
+	z-index:1;
+}
+.header_heading{
+	color:#FFF;
+	text-align:center;
+	padding:0.67em;
+	font-size:1.55em;
+	font-family:"Arial Black", Gadget, sans-serif;
+}
+.body_page_outline{
+	margin-top:50px;
+	min-height:600px;
+}
+.body_page{
+	margin:6em 0 6em;
+}
+.login_box_outline{
+	background-color:#fff;
+	box-shadow: 0px 4px 2px #b4b4b4;
+	padding:3em 1.15em;
+	border: 1px solid #aaaaaa;
+	border-radius: 4px;
+}
+.v-form_control{
+	padding-bottom:10px;
+}
+.login_form_label{
+	font-size:1.5em;
+}
+.login_form_submit{
+	padding:0.8em 3.5em;
+	font-weight:bold;
+}
+.footer{
+	background-color:#535353;
+	color:#DADADA;
+	padding:2.0em 0.8em;
+}
+.footer_part{
+	padding:0 1.8em;
+}
+.footer_heading{
+	border-bottom:1px solid;
+	margin-bottom:1em;
+}
+.copyright{
+	background-color:#000;
+	border-top:1px solid #CACACA;
+	padding:1.9em 0 0.8em;
+	color:#FFF;
+}
+
+/* sign up page css */
+.form_heading{
+	text-align:center;
+	margin-bottom:10px;
+	margin-top:5px;
+	margin-bottom:20px;
+	color:#1641cc;
+	text-transform:uppercase;
+	font-weight:bold;
+}
+
+/* project list page css */
+.nav_header{
+	background-color:#1641cc;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 5px rgba(0, 0, 0, 0.075);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 5px rgba(0, 0, 0, 0.075);
+}
+.navigation{
+}
+.navigation li{
+	font-size:1.3em;
+	border-right:1px solid #ddd;
+	font-weight:bold;
+	
+}
+.navigation li a{
+	color:#fff;
+	padding-left:20px;
+	padding-right:20px;
+	text-shadow:none;
+	transition:ease-in 0.5s all 0s;
+}
+.navigation li a:hover{
+	background-color:#000;
+	transition:ease-in 0.5s all 0s;
+}
+.navigation_active{
+	background-color:#000;
+}
+.page_nav{
+	padding:0px;
+}
+#navigation{
+	padding-left:0px;
+}
+
+.project_list_heading{
+	text-align:center;
+	margin:0 0 1em 0;
+	color:#1641cc;
+}
+.project_list_table{
+	font-size:1.2em;
+}
+
+/* Project Status Page CSS */
+.project_description{
+	border:1px solid #494949;
+	border-radius:4px;
+	padding:0 2em;
+	font-size:1.1em;
+}
+.project_description_text{
+	margin-bottom:1.5em;
+}
+.project_description_heading{
+	color:#1641cc;
+}
+.project_description_skills{
+	padding-left:0px;
+}
+.project_description_topic{
+	font-weight:bold;
+}
+.chat_box {
+	background-color: #CACACA;
+	max-width: 50em;
+	min-width: 560px;
+	padding: 1em;
+}
+.chat-thread {
+	width: 85%;
+	float: left;
+}
+.chat-thread:before {
+	content: "";
+	display: block;
+	width: 0;
+	height: 0;
+	border: solid 10px;
+	border-color: transparent #d8d8d8 transparent transparent;
+}
+.chat-image {
+	width: 10%;
+	float: left;
+}
