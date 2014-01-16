@@ -159,6 +159,30 @@ p{
 .project_description_topic{
 	font-weight:bold;
 }
+.proposal_outline{
+	margin:1.5em 0;
+}
+.proposal_heading{
+	color:#1641cc;
+}
+.no_proposal{
+	font-size:1.3em;
+}
+.proposal_part{
+	margin:1.2em 0;
+	background-color:#EAEAEA;
+	border-radius:4px;
+	padding-top:1.5em;
+	padding-bottom:1.5em;
+}
+.proposal_bidder_name{
+	margin-top:0px;
+}
+.proposal_bidder_price{
+	font-size:1.5em;
+	color:#ff0000;
+}
+/* chat page css */
 .chat_box {
 	background-color: #CACACA;
 	max-width: 50em;
@@ -181,3 +205,76 @@ p{
 	width: 10%;
 	float: left;
 }
+
+/* find job page css */
+
+.job_list_outline{
+	margin:1.2em 0;
+}
+.job_part{
+	margin: 1.2em 0;
+	border-radius: 4px;
+	padding-top: 1.5em;
+	padding-bottom: 1.5em;
+	background-color: #FDFDFD;
+	transition:ease-in 0.1s all 0s;
+}
+.job_part:hover{
+	background-color:#EAEAEA;
+	transition:ease-in 0.1s all 0s;
+}
+.job_title{
+	margin-top:0px;
+	color:#1641cc;
+}
+
+/* job list page css */
+
+.find_job_heading{
+	color:#1641cc;
+	margin-top:0px;
+	padding:0 1em;
+}
+.find_job_outline{
+	margin:1.2em 0;
+}
+.find_job_part{
+	margin:1em 0;
+	border:1px solid #484848;
+	border-radius:4px;
+	padding-top: 1.5em;
+	padding-bottom: 1.5em;
+	font-size:1.1em;
+}
+
+/* post bid page css */
+
+.bid_outline{
+	background-color:#6F6F6F;
+	padding:1.5em 1em;
+	color:#fff;
+	font-size:1.2em;
+}
+.bid_heading{
+	color:#FFF;
+	margin-top:0px;
+}
+.bid_textarea{
+	background-color:#FFF;
+	border-radius:0px;
+	resize:none;
+	padding:1em;
+	font-size:1.2em;
+	margin:1.5em 0;
+}
+.bid_text{
+	margin-bottom:1.2em;
+	border-radius:0px;
+}
+.bid_proposal_part{
+	margin:1.2em 0;
+	background-color:#EAEAEA;
+	border-radius:4px;
+	padding:1.5em 0.3em;
+}
+
