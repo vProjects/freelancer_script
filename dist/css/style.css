@@ -94,6 +94,10 @@ p{
 	text-transform:uppercase;
 	font-weight:bold;
 }
+.err_name{
+	display:none;
+	color:#FA0505;
+}
 
 /* project list page css */
 .nav_header{
@@ -129,6 +133,14 @@ p{
 }
 #navigation{
 	padding-left:0px;
+}
+#success_msg{
+	display:none;
+	font-size:1.5em;
+}
+#warning_msg{
+	display:none;
+	font-size:1.5em;
 }
 
 .project_list_heading{
@@ -185,13 +197,10 @@ p{
 /* chat page css */
 .chat_box {
 	background-color: #CACACA;
-	max-width: 50em;
-	min-width: 560px;
 	padding: 1em;
 }
 .chat-thread {
-	width: 85%;
-	float: left;
+	padding:1.5em 1em;
 }
 .chat-thread:before {
 	content: "";
@@ -201,9 +210,7 @@ p{
 	border: solid 10px;
 	border-color: transparent #d8d8d8 transparent transparent;
 }
-.chat-image {
-	width: 10%;
-	float: left;
+.chat-image {	
 }
 
 /* find job page css */

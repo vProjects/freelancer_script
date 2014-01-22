@@ -9,6 +9,7 @@
 <link rel="stylesheet" type="text/css" href="dist/css/style.css" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="dist/js/bootstrap.js"></script>
+<script src="js/validiation.js"></script>
 <title>SIGNUP</title>
 </head>
 
@@ -53,57 +54,58 @@
             </div>
             <!-- navbar ends here -->
             <div class="col-md-8 col-md-offset-2 login_box_outline">
-            	<form class="form-horizontal" method="post">
+            	<form action="#" class="form-horizontal" method="post" id="signup_form">
                 	<h3 class="form_heading">Registration Form</h3>
                 	<div class="form-group v-form_control">
-                    	<label class="col-md-3 control-label login_form_label">First Name</label>
+                    	<label class="col-md-3 control-label login_form_label">Full Name</label>
                         <div class="col-md-8">
-      						<input type="text" class="form-control" placeholder="First Name">
-    					</div>
-                    </div>
-                    <div class="form-group v-form_control">
-                    	<label class="col-md-3 control-label login_form_label">Last Name</label>
-                        <div class="col-md-8">
-      						<input type="text" class="form-control" placeholder="Last Name">
+      						<input type="text" class="form-control" placeholder="Name" id="signup_name" name="name">
+                            <div id="err_signup_name"></div>
     					</div>
                     </div>
                     <div class="form-group v-form_control">
                     	<label class="col-md-3 control-label login_form_label">Email Id</label>
                         <div class="col-md-8">
-      						<input type="text" class="form-control" placeholder="Email">
+      						<input type="text" class="form-control" placeholder="Email" id="signup_email" name="email">
+                            <div id="err_signup_email"></div>
     					</div>
                     </div>
                     <div class="form-group v-form_control">
                     	<label class="col-md-3 control-label login_form_label">Contact No</label>
                         <div class="col-md-8">
-      						<input type="text" class="form-control" placeholder="Contact No">
+      						<input type="text" class="form-control" placeholder="Contact No" id="signup_contact" name="contact_no">
+                            <div id="err_signup_contact"></div>
     					</div>
                     </div>
                     <div class="form-group v-form_control">
                     	<label class="col-md-3 control-label login_form_label">Password</label>
                         <div class="col-md-8">
-      						<input type="password" class="form-control" placeholder="Password" name="password">
+      						<input type="password" class="form-control" placeholder="Password" name="password" id="signup_password" name="password">
+                            <div id="err_signup_password"></div>
     					</div>
                     </div>
                     <div class="form-group v-form_control">
                     	<label class="col-md-3 control-label login_form_label">Confirm Password</label>
                         <div class="col-md-8">
-      						<input type="password" class="form-control" placeholder="Confirm Password" name="confirm_password">
+      						<input type="password" class="form-control" placeholder="Confirm Password" id="signup_confirm_password" name="confirm_password">
+                            <div id="err_signup_confirm_password"></div>
     					</div>
                     </div>
                     <div class="form-group v-form_control">
   						<label class="col-md-offset-3 col-md-4 login_form_label">
-    						<input type="radio" name="optionsRadios" value="option1">
+    						<input type="radio" name="optionsRadios" value="option1" id="signup_employer">
     						Employer
   						</label>
   						<label class="col-md-4 login_form_label">
-    						<input type="radio" name="optionsRadios" value="option1">
+    						<input type="radio" name="optionsRadios" value="option2" id="signup_contractor">
     						Contractor
+                            <div id="err_radio"></div>
   						</label>
+                        
 					</div>
                      <div class="form-group v-form_control">
                         <div class="col-md-offset-3 col-md-8">
-      						<input type="submit" class="btn btn-primary login_form_submit" value="SIGNUP">
+      						<input type="button" class="btn btn-primary login_form_submit" value="SIGNUP" onclick="validateSignupForm('signup_form')">
     					</div>
                     </div>
                 </form>
