@@ -58,6 +58,7 @@
 				{
 					$_SESSION['success'] = $login[1];
 					$_SESSION['user'] = $login[2];
+					$_SESSION['user_id'] = $login[3];
 					//checking for employer or contractor login
 					if($login[2] == 'employer')
 					{
@@ -80,6 +81,18 @@
 		//for post project data
 		case "post_project.php":
 		{
+			//inserting project values to database
+			$post_project = $manageData->postProject($GLOBALS['_POST'],$GLOBALS['_FILES'],$_SESSION['user_id']);
+			if($post_project == 1)
+			{
+				$_SESSION['success'] = 'Project Posted Successfully!!';
+				header("Location: ../post_project.php");
+			}
+			else if($post_project == 0)
+			{
+				$_SESSION['warning'] = 'Project Post Unsuccessfull!!';
+				header("Location: ../post_project.php");
+			}
 			break;
 		}
 	}

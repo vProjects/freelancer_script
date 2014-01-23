@@ -102,7 +102,7 @@
 					if($login_details[0]['password'] == $password)
 					{
 						//successfull login details
-						return array(1,'Login Successfull!!',$login_details[0]['category']);
+						return array(1,'Login Successfull!!',$login_details[0]['category'],$login_details[0]['user_id']);
 					}
 					else
 					{
@@ -120,6 +120,37 @@
 			}
 		}
 		
+		
+		/*
+		 method for project posting
+		 Auth: Dipanjan
+		*/
+		function postProject($userData,$userImage,$user_id){
+			//creating project id
+			$project_id = uniqid('PROJECT');
+			//creating posting date and time
+			$curdate = $this->getCurrentDate();
+			$curtime = $this->getCurrentTime();
+			//uploading profile image in UI img folder
+				if(!empty($userImage['files']['name']))
+				{
+					//move the uploaded file to the UI Layer img folder of main image
+					$result_upload = $this->manage_fileUploader->upload_document_file($userImage['files'],'../files/');
+					//photo_name variable saves the image location
+					$file_name = "files/".$result_upload;
+				}
+				else
+				{
+					$file_name = "";	
+				}
+				//creating the column name array
+				$column_name = array("project_id","project_name","project_description","date","time","files","skills","preferred_location","price_range","time_range","user_id");
+				//creating table value
+				$column_values = array($project_id,$userData['project_name'],$userData['project_description'],$curdate,$curtime,$file_name,$userData['skills'],$userData['preferred_location'],$userData['price_range'],$userData['time_range'],$user_id);
+				//inserting values to post info table
+				$insert = $this->manage_content->insertValue("project_info",$column_name,$column_values);
+				return $insert;
+		}
 		
 		/*
 		 method for getting current date

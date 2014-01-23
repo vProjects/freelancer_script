@@ -28,7 +28,7 @@
                 </form>
                 <div class="job_list_outline">
                 	<div class="col-md-12 job_part">
-                    	<h3 class="job_title">Project Title</h3>
+                    	<h3 class="job_title"><a href="post_bid.php"> Project Title</a></h3>
                         <p class="col-md-4 project_description_skills"><span class="project_description_topic">Price</span>: $200 - $300</p>
                         <p class="col-md-4"><span class="project_description_topic">Time Remaining</span>: 3days 22hour</p>
                         <p class="col-md-4"><span class="project_description_topic">Total Proposal</span>: 3</p>

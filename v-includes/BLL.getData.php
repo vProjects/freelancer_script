@@ -18,6 +18,14 @@
 			return $this->manage_content;
 		}
 		
+		/*
+		 method for constructing DAL class
+		 Auth: Dipanjan
+		*/
+		
+		function getProjectList($user_id)
+		{
+		}
 	}
 	
 ?>

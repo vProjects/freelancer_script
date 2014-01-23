@@ -12,7 +12,7 @@
 <div class="container body_page_outline">
     <div class="row">
     	<div class="body_page">
-        	<?php include 'v-templates/navbar.php'; ?>
+        	<?php include 'v-templates/navbar.php';?>
             <div class="col-md-12 login_box_outline">
             	<h3 class="project_list_heading">Post A Project</h3>
                 <form action="v-includes/manageData.php" class="form-horizontal" method="post" id="postProject_form" enctype="multipart/form-data">
@@ -70,7 +70,7 @@
                     <div class="form-group v-form_control">
                     	<label class="col-md-3 control-label login_form_label">Upload File</label>
                         <div class="col-md-8">
-      						<input type="file" class="form-control">
+      						<input type="file" class="form-control" name="files">
     					</div>
                     </div>
                     <div class="form-group v-form_control">

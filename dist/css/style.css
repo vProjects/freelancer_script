@@ -18,6 +18,13 @@ p{
 	line-height:20px;
 	text-align:justify;
 }
+a{
+	color:inherit;
+}
+a:hover{
+	text-decoration:none;
+	color:inherit;
+}
 
 /* CSS For Bootstrap */
 .row{

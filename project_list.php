@@ -20,10 +20,10 @@
                 	<thead>
                     	<tr>
                         	<th>Project Title</th>
-                            <th class="col-md-4">Description</th>
+                            <th class="col-md-4 col-sm-4 col-xs-4">Description</th>
                             <th>Skills Required</th>
-                            <th class="col-md-2">Price Range</th>
-                            <th class="col-md-2">Date & Time</th>
+                            <th>Price Range</th>
+                            <th>Date & Time</th>
                             <th>Preferred Location</th>
                             <th>File Uploaded</th>
                         </tr>
