@@ -56,6 +56,20 @@
 			}
 		}
 		
+		function getRowValue($table_name,$row_value,$value_entered)
+		{
+			try{
+				$query = $this->link->prepare("SELECT * from $table_name where $row_value='$value_entered'");
+				$query->execute();
+				$rowcount = $query->rowCount();
+				return $rowcount;
+			}
+			catch(Exception $e)
+			{
+				throw "Result Not Found";
+			}
+		}
+		
 		function getValue_where($table_name,$value,$row_value,$value_entered)
 		{
 			try{

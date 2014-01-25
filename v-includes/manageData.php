@@ -95,6 +95,16 @@
 			}
 			break;
 		}
+		
+		//for edit project page
+		case "edit_project.php?id=".$GLOBALS['_POST']['project_id']."":
+		{
+			//update the values which are set
+			$update_project = $manageData->editProject($GLOBALS['_POST'],$GLOBALS['_FILES']);
+			//returning to edit project page
+			header("Location: ../edit_project.php?id=".$GLOBALS['_POST']['project_id']."");
+			break;
+		}
 	}
 
 ?>

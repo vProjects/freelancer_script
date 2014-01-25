@@ -22,7 +22,6 @@ a{
 	color:inherit;
 }
 a:hover{
-	text-decoration:none;
 	color:inherit;
 }
 
@@ -61,6 +60,7 @@ a:hover{
 	padding:3em 1.15em;
 	border: 1px solid #aaaaaa;
 	border-radius: 4px;
+	min-height:500px;
 }
 .v-form_control{
 	padding-bottom:10px;
@@ -200,6 +200,16 @@ a:hover{
 .proposal_bidder_price{
 	font-size:1.5em;
 	color:#ff0000;
+}
+.add_file_link{
+	margin:1em;
+	color:#0060FF;
+	cursor:pointer;
+}
+.remove_file_link{
+	margin:1em;
+	color:#F80707;
+	cursor:pointer;
 }
 /* chat page css */
 .chat_box {

@@ -58,6 +58,7 @@
                                 <option value="Within 2 week">Within 2 week</option>
                                 <option value="Within 1 month">Within 1 month</option>
                                 <option value="Within 2 month">Within 2 month</option>
+                                <option value="Above 2 month">Above 2 month</option>
                             </select>
     					</div>
                     </div>
@@ -71,6 +72,8 @@
                     	<label class="col-md-3 control-label login_form_label">Upload File</label>
                         <div class="col-md-8">
       						<input type="file" class="form-control" name="files">
+                            <!--<p class="add_file_link pull-left">Add Another File</p>
+                            <p class="remove_file_link pull-left">Remove File</p>-->
     					</div>
                     </div>
                     <div class="form-group v-form_control">

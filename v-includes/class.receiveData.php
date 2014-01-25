@@ -153,6 +153,47 @@
 		}
 		
 		/*
+		 method for edit project
+		 Auth: Dipanjan
+		*/
+		function editProject($userData,$userImage)
+		{
+			//getting the id number of project info table of this project id
+			$table_id = $this->manage_content->getValue_where("project_info","*","project_id",$userData['project_id']);
+			$id = $table_id[0]['id'];
+			//update each field which is set
+			if(isset($userData['project_name']))
+			{
+				$result = $this->manage_content->updateValueWhere("project_info","project_name",$userData['project_name'],"id",$id);
+			}
+			
+			if(isset($userData['project_description']))
+			{
+				$result = $this->manage_content->updateValueWhere("project_info","project_description",$userData['project_description'],"id",$id);
+			}
+			
+			if(isset($userData['skills']))
+			{
+				$result = $this->manage_content->updateValueWhere("project_info","skills",$userData['skills'],"id",$id);
+			}
+			
+			if(isset($userData['price_range']))
+			{
+				$result = $this->manage_content->updateValueWhere("project_info","price_range",$userData['price_range'],"id",$id);
+			}
+			
+			if(isset($userData['time_range']))
+			{
+				$result = $this->manage_content->updateValueWhere("project_info","time_range",$userData['time_range'],"id",$id);
+			}
+			
+			if(isset($userData['preferred_location']))
+			{
+				$result = $this->manage_content->updateValueWhere("project_info","preferred_location",$userData['preferred_location'],"id",$id);
+			}
+		}
+		
+		/*
 		 method for getting current date
 		 Auth: Dipanjan
 		*/

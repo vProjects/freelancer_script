@@ -20,69 +20,18 @@
                 	<thead>
                     	<tr>
                         	<th>Project Title</th>
-                            <th class="col-md-4 col-sm-4 col-xs-4">Description</th>
+                            <th class="col-md-3 col-sm-4 col-xs-4">Description</th>
                             <th>Skills Required</th>
                             <th>Price Range</th>
+                            <th>Time Range</th>
                             <th>Date & Time</th>
                             <th>Preferred Location</th>
                             <th>File Uploaded</th>
+                            <th>Edit Project</th>
                         </tr>
                     </thead>
                     <tbody>
-                    	<tr>
-                        	<td>HTMl Design</td>
-                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</td>
-                            <td>HTML, CSS</td>
-                            <td>$200 - $300</td>
-                            <td>01-01-2014</td>
-                            <td>Any Where</td>
-                            <td>No</td>
-                        </tr>
-                        <tr>
-                        	<td>HTMl Design</td>
-                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</td>
-                            <td>HTML, CSS</td>
-                            <td>$200 - $300</td>
-                            <td>01-01-2014</td>
-                            <td>Any Where</td>
-                            <td>No</td>
-                        </tr>
-                        <tr>
-                        	<td>HTMl Design</td>
-                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</td>
-                            <td>HTML, CSS</td>
-                            <td>$200 - $300</td>
-                            <td>01-01-2014</td>
-                            <td>Any Where</td>
-                            <td>No</td>
-                        </tr>
-                        <tr>
-                        	<td>HTMl Design</td>
-                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</td>
-                            <td>HTML, CSS</td>
-                            <td>$200 - $300</td>
-                            <td>01-01-2014</td>
-                            <td>Any Where</td>
-                            <td>No</td>
-                        </tr>
-                        <tr>
-                        	<td>HTMl Design</td>
-                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</td>
-                            <td>HTML, CSS</td>
-                            <td>$200 - $300</td>
-                            <td>01-01-2014</td>
-                            <td>Any Where</td>
-                            <td>No</td>
-                        </tr>
-                        <tr>
-                        	<td>HTMl Design</td>
-                            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</td>
-                            <td>HTML, CSS</td>
-                            <td>$200 - $300</td>
-                            <td>01-01-2014</td>
-                            <td>Any Where</td>
-                            <td>No</td>
-                        </tr>
+                    	<?php $project_list = $manageContent->getProjectList($_SESSION['user_id']); ?>
                     </tbody>
                 </table>
                 </div>

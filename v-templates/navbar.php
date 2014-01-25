@@ -18,7 +18,6 @@
 				?>
                 <li <?php if($pageTitle == 'POST PROJECT'){ echo 'class="navigation_active"';} ?>><a href="post_project.php">Post Project</a></li>
                 <li <?php if($pageTitle == 'PROJECT LIST'){ echo 'class="navigation_active"';} ?>><a href="project_list.php">Project List</a></li>
-                <li <?php if($pageTitle == 'EDIT PROJECT'){ echo 'class="navigation_active"';} ?>><a href="edit_project.php">Edit Project</a></li>
                 
                 <?php } else if(isset($_SESSION['user']) && $_SESSION['user'] == 'contractor') { ?>
                 
