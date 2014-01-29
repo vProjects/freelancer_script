@@ -143,10 +143,31 @@
 				{
 					$file_name = "";	
 				}
+				//varriable which will contain the category in string format
+				$category_string = ""; 
+				
+				if(!empty($userData['category']) && isset($userData['category']))
+				{
+					$category = $userData['category'];
+					if( $category != "" )
+					{
+						//convert array to string seperated by commas
+						foreach($category as $cate)
+						{
+							$category_string = $category_string.",".$cate ;
+						}
+					}
+					/*
+					- remove the first word from the $category_string sa it
+					- it contains a comma
+					*/
+					
+					$category_string = substr($category_string,1);
+				}
 				//creating the column name array
-				$column_name = array("project_id","project_name","project_description","date","time","files","skills","preferred_location","price_range","time_range","user_id");
+				$column_name = array("category","project_id","project_name","project_description","date","time","files","skills","preferred_location","price_range","time_range","user_id");
 				//creating table value
-				$column_values = array($project_id,$userData['project_name'],$userData['project_description'],$curdate,$curtime,$file_name,$userData['skills'],$userData['preferred_location'],$userData['price_range'],$userData['time_range'],$user_id);
+				$column_values = array($category_string,$project_id,$userData['project_name'],$userData['project_description'],$curdate,$curtime,$file_name,$userData['skills'],$userData['preferred_location'],$userData['price_range'],$userData['time_range'],$user_id);
 				//inserting values to post info table
 				$insert = $this->manage_content->insertValue("project_info",$column_name,$column_values);
 				return $insert;
@@ -162,6 +183,32 @@
 			$table_id = $this->manage_content->getValue_where("project_info","*","project_id",$userData['project_id']);
 			$id = $table_id[0]['id'];
 			//update each field which is set
+			//varriable which will contain the category in string format
+			$category_string = ""; 
+			
+			if(!empty($userData['category']) && isset($userData['category']))
+			{
+				$category = $userData['category'];
+				if( $category != "" )
+				{
+					//convert array to string seperated by commas
+					foreach($category as $cate)
+					{
+						$category_string = $category_string.",".$cate ;
+					}
+				}
+				/*
+				- remove the first word from the $category_string sa it
+				- it contains a comma
+				*/
+				
+				$category_string = substr($category_string,1);
+			}
+			if(isset($category_string) && !empty($category_string))
+			{
+				$result = $this->manage_content->updateValueWhere("project_info","category",$category_string,"id",$id);
+			}
+			
 			if(isset($userData['project_name']))
 			{
 				$result = $this->manage_content->updateValueWhere("project_info","project_name",$userData['project_name'],"id",$id);

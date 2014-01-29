@@ -67,6 +67,21 @@
 			{
 				echo '<form action="v-includes/manageData.php" class="form-horizontal" method="post" enctype="multipart/form-data">
 						<div class="form-group v-form_control">
+							<label class="col-md-3 control-label login_form_label">Category</label>
+							<div class="col-md-8">
+								<input type="text" class="form-control" placeholder="Category" value="'.$project_details[0]['category'].'">
+							</div>
+						</div>
+						<div class="form-group v-form_control">
+							<label class="col-md-3 control-label login_form_label">Category</label>
+							<div class="col-md-8">
+								<select class="form-control" id="postProject_category" name="category[]" multiple="multiple">
+									<option value="IT & Programming">IT & Programming</option>
+									<option value="Design & Multimedia">Design & Multimedia</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group v-form_control">
 							<label class="col-md-3 control-label login_form_label">Project Title</label>
 							<div class="col-md-8">
 								<input type="text" class="form-control" placeholder="Project Title" name="project_name" value="'.$project_details[0]['project_name'].'">
@@ -210,6 +225,117 @@
 						}
 						echo '<div class="clearfix"></div>
 						</div>';
+			}
+			else
+			{
+				echo '<p style="font-size:1.5em; color:#ff0000; text-align:center;">No Project Details Found</p>';
+			}
+		}
+		
+		/*
+		 method for getting all job list
+		 Auth: Dipanjan
+		*/
+		function getAllJobList()
+		{
+			//getting all job list
+			$job_lists = $this->manage_content->getValue_descending("project_info","*");
+			//showing it on page
+			foreach($job_lists as $job_list)
+			{
+				//getting total proposal
+				$rowcount = $this->manage_content->getRowValue("bid_info","project_id",$job_list['project_id']);
+				echo '<div class="col-md-12 job_part">
+                    	<h3 class="job_title"><a href="post_bid.php?id='.$job_list['project_id'].'"> '.$job_list['project_name'].'</a></h3>
+                        <p class="col-md-4 project_description_skills"><span class="project_description_topic">Price</span>: '.$job_list['price_range'].'</p>
+                        <p class="col-md-4"><span class="project_description_topic">Time Remaining</span>: 3days 22hour</p>
+                        <p class="col-md-4"><span class="project_description_topic">Total Proposal</span>: '.$rowcount.'</p>
+                        <p>'.$job_list['project_description'].'</p>
+                        <p><span class="project_description_topic">Skills Required</span>: '.$job_list['skills'].'</p>
+                    </div>';
+			}
+		}
+		
+		/*
+		 method for getting project details in post bid page
+		 Auth: Dipanjan
+		*/
+		function getProjectDetails($project_id)
+		{
+			//getting project details
+			$project_details = $this->manage_content->getValue_where("project_info","*","project_id",$project_id);
+			//checking for empty result
+			if(!empty($project_details[0]))
+			{
+				//checking for preferred location
+				if(empty($project_details[0]['preferred_location']))
+				{
+					$preferred_location = 'Any Where';
+				}
+				else
+				{
+					$preferred_location = $project_details[0]['preferred_location'];
+				}
+				//getting total no of proposal from database
+				$rowcount = $this->manage_content->getRowValue("bid_info","project_id",$project_id);
+				//get all the bid details of this project
+				$bid_details = $this->manage_content->getValue_where("bid_info","*","project_id",$project_id);
+				//showing the result in page
+				echo '<div class="col-md-7">
+						<!-- project description starts here -->
+						<div class="project_description col-md-12">
+							<h3 class="project_description_heading">'.$project_details[0]['project_name'].'</h3>
+							<p class="project_description_text">'.$project_details[0]['project_description'].'</p>
+							<p><span class="project_description_topic">Skills Required</span>: '.$project_details[0]['skills'].'</p>
+							<p><span class="project_description_topic">Price Range</span>: '.$project_details[0]['price_range'].'</p>
+							<p><span class="project_description_topic">Time Remaining</span>: 14days 22hour</p>
+							<p><span class="project_description_topic">Preffered Location</span>: '.$preferred_location.'</p>
+							<p><span class="project_description_topic">Uploaded File</span>: No Files</p>
+							<div class="clearfix"></div>
+						</div>
+						<!-- project description ends here -->
+						<div class="proposal_outline col-md-12">
+							<div class="col-md-12">
+								<h4 class="proposal_heading pull-left">Proposal List</h4>
+								<h4 class="pull-right no_proposal"><span class="project_description_topic">Total Proposal</span>: '.$rowcount.'</h4>
+							</div>';
+						
+						//checking for empty bid status
+						if(!empty($bid_details[0]))
+						{
+							foreach($bid_details as $bid_detail)
+							{
+								//getting the user details who have bided on this project
+								$user_details = $this->manage_content->getValue_where("user_info","*","user_id",$bid_detail['user_id']);
+								//setting the default image
+								if(empty($user_details[0]['profile_image']))
+								{
+									$profile_image = 'img/thumb64-80-1413559917-vasu_naman.jpg';
+								}
+								else
+								{
+									$profile_image = $user_details[0]['profile_image'];
+								}
+								echo '<div class="bid_proposal_part col-md-12">
+										<div class="col-md-2"><img src="'.$profile_image.'" /></div>
+										<div class="col-md-10">
+											<h4 class="proposal_bidder_name">'.$user_details[0]['f_name']." ".$user_details[0]['l_name'].'</h4>
+											<p>'.$bid_detail['bid_description'].'</p>
+											<p><span class="project_description_topic">Skills</span>: HTML, CSS, PHP, .NET</p>
+											<p><span class="project_description_topic">Proposal</span>:<span class="proposal_bidder_price"> $'.$bid_detail['price'].'</span></p>
+										</div>
+									</div>';
+							}
+							
+						}
+						else
+						{
+							echo '<p style="font-size:1.5em; color:#ff0000; text-align:center;">No Proposals Yet</p>';
+						}
+					echo '<div class="clearfix"></div>
+								</div>
+							</div>
+							<!-- bidding part starts here -->';
 			}
 			else
 			{

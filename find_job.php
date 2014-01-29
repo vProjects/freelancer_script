@@ -18,63 +18,16 @@
                 	<div class="form-group v-form_control">
                     	<label class="col-md-2 control-label login_form_label">Categories</label>
                         <div class="col-md-4">
-      						<select class="form-control">
-                            	<option>All Categories</option>
-                                <option>IT & Programming</option>
-                                <option>Design & Multimedia</option>
+      						<select class="form-control" id="findjob_category">
+                            	<option>---Select A Category---</option>
+                                <option value="IT & Programming">IT & Programming</option>
+                                <option value="Design & Multimedia">Design & Multimedia</option>
                             </select>
     					</div>
                     </div>
                 </form>
                 <div class="job_list_outline">
-                	<div class="col-md-12 job_part">
-                    	<h3 class="job_title"><a href="post_bid.php"> Project Title</a></h3>
-                        <p class="col-md-4 project_description_skills"><span class="project_description_topic">Price</span>: $200 - $300</p>
-                        <p class="col-md-4"><span class="project_description_topic">Time Remaining</span>: 3days 22hour</p>
-                        <p class="col-md-4"><span class="project_description_topic">Total Proposal</span>: 3</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        <p><span class="project_description_topic">Skills Required</span>: HTML, CSS, PHP, .NET</p>
-                    </div>
-                    <div class="col-md-12 job_part">
-                    	<h3 class="job_title">Project Title</h3>
-                        <p class="col-md-4 project_description_skills"><span class="project_description_topic">Price</span>: $200 - $300</p>
-                        <p class="col-md-4"><span class="project_description_topic">Time Remaining</span>: 3days 22hour</p>
-                        <p class="col-md-4"><span class="project_description_topic">Total Proposal</span>: 3</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        <p><span class="project_description_topic">Skills Required</span>: HTML, CSS, PHP, .NET</p>
-                    </div>
-                    <div class="col-md-12 job_part">
-                    	<h3 class="job_title">Project Title</h3>
-                        <p class="col-md-4 project_description_skills"><span class="project_description_topic">Price</span>: $200 - $300</p>
-                        <p class="col-md-4"><span class="project_description_topic">Time Remaining</span>: 3days 22hour</p>
-                        <p class="col-md-4"><span class="project_description_topic">Total Proposal</span>: 3</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        <p><span class="project_description_topic">Skills Required</span>: HTML, CSS, PHP, .NET</p>
-                    </div>
-                    <div class="col-md-12 job_part">
-                    	<h3 class="job_title">Project Title</h3>
-                        <p class="col-md-4 project_description_skills"><span class="project_description_topic">Price</span>: $200 - $300</p>
-                        <p class="col-md-4"><span class="project_description_topic">Time Remaining</span>: 3days 22hour</p>
-                        <p class="col-md-4"><span class="project_description_topic">Total Proposal</span>: 3</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        <p><span class="project_description_topic">Skills Required</span>: HTML, CSS, PHP, .NET</p>
-                    </div>
-                    <div class="col-md-12 job_part">
-                    	<h3 class="job_title">Project Title</h3>
-                        <p class="col-md-4 project_description_skills"><span class="project_description_topic">Price</span>: $200 - $300</p>
-                        <p class="col-md-4"><span class="project_description_topic">Time Remaining</span>: 3days 22hour</p>
-                        <p class="col-md-4"><span class="project_description_topic">Total Proposal</span>: 3</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        <p><span class="project_description_topic">Skills Required</span>: HTML, CSS, PHP, .NET</p>
-                    </div>
-                    <div class="col-md-12 job_part">
-                    	<h3 class="job_title">Project Title</h3>
-                        <p class="col-md-4 project_description_skills"><span class="project_description_topic">Price</span>: $200 - $300</p>
-                        <p class="col-md-4"><span class="project_description_topic">Time Remaining</span>: 3days 22hour</p>
-                        <p class="col-md-4"><span class="project_description_topic">Total Proposal</span>: 3</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        <p><span class="project_description_topic">Skills Required</span>: HTML, CSS, PHP, .NET</p>
-                    </div>
+                	<?php $job_list = $manageContent->getAllJobList(); ?>
                     <div class="clearfix"></div>
                 </div>
             </div>

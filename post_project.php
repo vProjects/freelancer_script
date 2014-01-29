@@ -17,6 +17,17 @@
             	<h3 class="project_list_heading">Post A Project</h3>
                 <form action="v-includes/manageData.php" class="form-horizontal" method="post" id="postProject_form" enctype="multipart/form-data">
                 	<div class="form-group v-form_control">
+                    	<label class="col-md-3 control-label login_form_label">Category</label>
+                        <div class="col-md-8">
+      						<select class="form-control" id="postProject_category" name="category[]" multiple="multiple">
+                            	
+                                <option value="IT & Programming">IT & Programming</option>
+                                <option value="Design & Multimedia">Design & Multimedia</option>
+                            </select>
+                            <div id="err_postProject_category"></div>
+    					</div>
+                    </div>
+                    <div class="form-group v-form_control">
                     	<label class="col-md-3 control-label login_form_label">Project Title</label>
                         <div class="col-md-8">
       						<input type="text" class="form-control" placeholder="Project Title" id="postProject_name" name="project_name">

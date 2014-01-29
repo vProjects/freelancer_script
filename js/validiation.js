@@ -140,6 +140,7 @@ function validateLoginForm(form_name)
 
 function validateProjectPostForm(form_name)
 {
+	validateRequiredField('err_postProject_category','postProject_category');
 	validateRequiredField('postProject_name','err_postProject_name');
 	validateRequiredField('postProject_description','err_postProject_description');
 	validateRequiredField('postProject_skills','err_postProject_skills');
