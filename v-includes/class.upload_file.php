@@ -69,18 +69,18 @@ class FileUpload{
 		$ext = substr($filename,strpos($filename,'.'),4);
 		$filename_desired = substr($filename,0,strpos($filename,'.'));
 		
-		if(!in_array($ext,$this->allowed_documents_filetypes)){
+		/*if(!in_array($ext,$this->allowed_documents_filetypes)){
 			$this->error = 'The file you attempted to upload is not allowed';
 			//echo '<span style="color:red">' .$this->upload_path.$filename . '</span>';
 	  		die('');
-		}
+		}*/
 			
 		/*else if(filesize($input_name['tmp_name']) > $this->max_filesize){
 			$this->error = 'The file you attempted to upload is too large';
 	 		die('');
 		}*/
 			
-		else if(!is_writable($this->upload_path)){
+		if(!is_writable($this->upload_path)){
 			$this->error = 'You cannot upload to the specified directory please CHMOD it to 777';
 	  		die('');
 		}

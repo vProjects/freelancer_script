@@ -339,7 +339,26 @@
 			}
 			else
 			{
-				echo '<p style="font-size:1.5em; color:#ff0000; text-align:center;">No Project Details Found</p>';
+				echo '<div class="col-lg-7">
+							<p style="font-size:1.5em; color:#ff0000; text-align:center;">No Project Details Found</p>
+						</div>';
+			}
+		}
+		
+		/*
+		 method for getting valid project id valid or not
+		 Auth: Dipanjan
+		*/
+		function validProjectId($project_id){
+			//checking for valid project id
+			$valid_id = $this->manage_content->getValue_where("project_info","*","project_id",$project_id);
+			if(!empty($valid_id))
+			{
+				return 1;
+			}
+			else
+			{
+				return 0;
 			}
 		}
 		

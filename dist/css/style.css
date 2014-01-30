@@ -291,7 +291,7 @@ a:hover{
 	font-size:1.2em;
 	margin:1.5em 0;
 }
-.bid_text{
+.bid_text, .bid_select{
 	margin-bottom:1.2em;
 	border-radius:0px;
 }
@@ -300,5 +300,8 @@ a:hover{
 	background-color:#EAEAEA;
 	border-radius:4px;
 	padding:1.5em 0.3em;
+}
+.bid_proposal_submit{
+	margin:1em 0 0;
 }
 

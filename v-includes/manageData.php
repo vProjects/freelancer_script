@@ -105,6 +105,25 @@
 			header("Location: ../edit_project.php?id=".$GLOBALS['_POST']['project_id']."");
 			break;
 		}
+		
+		//for post bid page
+		case "post_bid.php?id=".$GLOBALS['_POST']['project_id']."":
+		{
+			//inserting bid details to database
+			$post_bid = $manageData->insertBid($GLOBALS['_POST'],$GLOBALS['_FILES'],$_SESSION['user_id']);
+			if($post_bid == 1)
+			{
+				$_SESSION['success'] = 'Bid Posted Successfully!!';
+			}
+			else
+			{
+				$_SESSION['warning'] = 'Bid Posting Unsuccessfull!!';
+			}
+			//returning to find job page
+			header("Location: ../find_job.php");
+			break;
+		}
+		
 	}
 
 ?>

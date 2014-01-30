@@ -131,7 +131,7 @@
 			//creating posting date and time
 			$curdate = $this->getCurrentDate();
 			$curtime = $this->getCurrentTime();
-			//uploading profile image in UI img folder
+			//uploading files in UI layer Files folder
 				if(!empty($userImage['files']['name']))
 				{
 					//move the uploaded file to the UI Layer img folder of main image
@@ -238,6 +238,40 @@
 			{
 				$result = $this->manage_content->updateValueWhere("project_info","preferred_location",$userData['preferred_location'],"id",$id);
 			}
+		}
+		
+		/*
+		 method for insert project
+		 Auth: Dipanjan
+		*/
+		function insertBid($userData,$userImage,$userId)
+		{
+			//creating bid id
+			$bid_id = uniqid('BID');
+			//getting current date and time
+			$curdate = $this->getCurrentDate();
+			$curtime = $this->getCurrentTime();
+			//uploading files in UI layer Files folder
+			if(!empty($userImage['files']['name']))
+			{
+				//move the uploaded file to the UI Layer img folder of main image
+				$result_upload = $this->manage_fileUploader->upload_document_file($userImage['files'],'../files/');
+				//photo_name variable saves the image location
+				$file_name = "files/".$result_upload;
+			}
+			else
+			{
+				$file_name = "";	
+			}
+			//get ip of bidder
+			$bid_ip = $this->manage_utility->getIpAddress();
+			//creating the column name array
+			$column_name = array("bid_id","project_id","bid_description","file_attached","date","time","price","time_range","bid_ip","user_id");
+			//creating the column value array
+			$column_value = array($bid_id,$userData['project_id'],$userData['description'],$file_name,$curdate,$curtime,$userData['price'],$userData['time_range'],$bid_ip,$userId);
+			//inserting values to bid info table
+			$insert = $this->manage_content->insertValue("bid_info",$column_name,$column_value);
+			return $insert;
 		}
 		
 		/*

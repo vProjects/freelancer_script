@@ -18,28 +18,47 @@
                 <?php
 					if(isset($project_id))
 					{
-						$bid_details = $manageContent->getProjectDetails($project_id);
+						$project_details = $manageContent->getProjectDetails($project_id);
 					}
 					else
 					{
-						echo '<p style="font-size:1.5em; color:#ff0000; text-align:center;">No Project Details Found</p>';
+						echo '<div class="col-lg-7">
+								<p style="font-size:1.5em; color:#ff0000; text-align:center;">No Project Details Found</p>
+							</div>';
 					}
 				?>
+                <?php 
+					//checking for valid project id number
+					$result = $manageContent->validProjectId($project_id);
+					if($result == 1)
+					{ ?>						
+                    
                 <div class="col-lg-5">
                 	<div class="bid_outline">
                     	<h4 class="bid_heading">Describe Your Proposal</h4>
-                        <form action="#" method="post">
-                        	<textarea rows="20" class="bid_textarea col-md-12"></textarea>
+                        <form action="v-includes/manageData.php" method="post" enctype="multipart/form-data">
+                        	<textarea rows="20" class="bid_textarea col-md-12" name="description"></textarea>
                             <p class="col-md-12 project_description_skills">Cost</p>
-                            <input type="text" class="form-control bid_text" placeholder="Cost Of this Project">
+                            <input type="text" class="form-control bid_text" placeholder="Cost Of this Project" name="price">
                             <p class="col-md-12 project_description_skills">Time Required</p>
-                            <input type="text" class="form-control bid_text" placeholder="Time Required">
+                            <select class="form-control bid_select" name="time_range">
+                            	<option value="Within 3 Days">Within 3 Days</option>
+                                <option value="Within 1 week">Within 1 week</option>
+                                <option value="Within 2 week">Within 2 week</option>
+                                <option value="Within 1 month">Within 1 month</option>
+                                <option value="Within 2 month">Within 2 month</option>
+                                <option value="Above 2 month">Above 2 month</option>
+                            </select>
+                            <p class="col-md-12 project_description_skills">Attach File</p>
+                            <input type="file" name="files">
+                            <input type="hidden" name="project_id" value="<?php echo $project_id; ?>" />
                             <input type="submit" class="btn btn-success btn-lg pull-right" value="SUBMIT"/>
+                            <div class="clearfix"></div>
                         </form>
-                        <div class="clearfix"></div>
                     </div>
                 </div>
                 <!-- bidding part ends here -->
+				<?php } ?>
             </div>
             <div class="clearfix"></div>
        </div>
