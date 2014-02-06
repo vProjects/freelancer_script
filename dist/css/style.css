@@ -211,6 +211,18 @@ a:hover{
 	color:#F80707;
 	cursor:pointer;
 }
+.award_button{
+	margin:1.6em 0;
+	padding:0.8em 2em;
+}
+.message_icon{
+	width:40px;
+	height:40px;
+}
+.message_text{
+	font-weight:bold;
+	margin:0 0.5em;
+}
 /* chat page css */
 .chat_box {
 	background-color: #CACACA;
@@ -269,6 +281,10 @@ a:hover{
 	padding-top: 1.5em;
 	padding-bottom: 1.5em;
 	font-size:1.1em;
+}
+.profile_image{
+	width:100%;
+	height:90px;
 }
 
 /* post bid page css */

@@ -31,7 +31,10 @@
 					//checking for valid project id number
 					$result = $manageContent->validProjectId($project_id);
 					if($result == 1)
-					{ ?>						
+					{ 
+						$bid_id = $manageContent->getBidId($project_id,$_SESSION['user_id']);
+						if(empty($bid_id))
+						{ ?>						
                     
                 <div class="col-lg-5">
                 	<div class="bid_outline">
@@ -52,13 +55,14 @@
                             <p class="col-md-12 project_description_skills">Attach File</p>
                             <input type="file" name="files">
                             <input type="hidden" name="project_id" value="<?php echo $project_id; ?>" />
+                            <input type="hidden" name="action" value="insert" />
                             <input type="submit" class="btn btn-success btn-lg pull-right" value="SUBMIT"/>
                             <div class="clearfix"></div>
                         </form>
                     </div>
                 </div>
                 <!-- bidding part ends here -->
-				<?php } ?>
+				<?php } else { $manageContent->getBidDescription($bid_id); } } ?>
             </div>
             <div class="clearfix"></div>
        </div>

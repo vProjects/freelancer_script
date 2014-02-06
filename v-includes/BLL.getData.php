@@ -210,11 +210,15 @@
 								}
 								echo '<div class="proposal_part col-md-12">
 										<div class="col-md-1"><img src="'.$profile_image.'" /></div>
-										<div class="col-md-10">
+										<div class="col-md-9">
 											<h4 class="proposal_bidder_name">'.$user_details[0]['f_name']." ".$user_details[0]['l_name'].'</h4>
 											<p>'.$bid_detail['bid_description'].'</p>
 											<p><span class="project_description_topic">Skills</span>: HTML, CSS, PHP, .NET</p>
-											<p><span class="project_description_topic">Proposal</span>:<span class="proposal_bidder_price"> $'.$bid_detail['price'].'</span></p>
+											<p><span class="project_description_topic">Proposal</span>:<span class="proposal_bidder_price">'.$bid_detail['price'].'</span></p>
+											<p><a href="#"><img src="img/message.png" class="message_icon"><span class="message_text">Conversion</span></a></p>
+										</div>
+										<div class="col-md-2">
+											<a href="#"><button class="btn btn-danger btn-lg award_button">Award</button></a>
 										</div>
 									</div>';
 							}
@@ -247,11 +251,11 @@
 				$rowcount = $this->manage_content->getRowValue("bid_info","project_id",$job_list['project_id']);
 				echo '<div class="col-md-12 job_part">
                     	<h3 class="job_title"><a href="post_bid.php?id='.$job_list['project_id'].'"> '.$job_list['project_name'].'</a></h3>
-                        <p class="col-md-4 project_description_skills"><span class="project_description_topic">Price</span>: '.$job_list['price_range'].'</p>
-                        <p class="col-md-4"><span class="project_description_topic">Time Remaining</span>: 3days 22hour</p>
+                        <p class="col-md-4"><span class="project_description_topic">Price</span>: '.$job_list['price_range'].'</p>
+                       
                         <p class="col-md-4"><span class="project_description_topic">Total Proposal</span>: '.$rowcount.'</p>
-                        <p>'.$job_list['project_description'].'</p>
-                        <p><span class="project_description_topic">Skills Required</span>: '.$job_list['skills'].'</p>
+                        <p class="col-md-12">'.$job_list['project_description'].'</p>
+                        <p class="col-md-12"><span class="project_description_topic">Skills Required</span>: '.$job_list['skills'].'</p>
                     </div>';
 			}
 		}
@@ -288,7 +292,6 @@
 							<p class="project_description_text">'.$project_details[0]['project_description'].'</p>
 							<p><span class="project_description_topic">Skills Required</span>: '.$project_details[0]['skills'].'</p>
 							<p><span class="project_description_topic">Price Range</span>: '.$project_details[0]['price_range'].'</p>
-							<p><span class="project_description_topic">Time Remaining</span>: 14days 22hour</p>
 							<p><span class="project_description_topic">Preffered Location</span>: '.$preferred_location.'</p>
 							<p><span class="project_description_topic">Uploaded File</span>: No Files</p>
 							<div class="clearfix"></div>
@@ -322,8 +325,9 @@
 											<h4 class="proposal_bidder_name">'.$user_details[0]['f_name']." ".$user_details[0]['l_name'].'</h4>
 											<p>'.$bid_detail['bid_description'].'</p>
 											<p><span class="project_description_topic">Skills</span>: HTML, CSS, PHP, .NET</p>
-											<p><span class="project_description_topic">Proposal</span>:<span class="proposal_bidder_price"> $'.$bid_detail['price'].'</span></p>
+											<p><span class="project_description_topic">Proposal</span>:<span class="proposal_bidder_price">'.$bid_detail['price'].'</span></p>
 										</div>
+										
 									</div>';
 							}
 							
@@ -346,10 +350,113 @@
 		}
 		
 		/*
+		 method for getting all job list
+		 Auth: Dipanjan
+		*/
+		function getJobList($user_id)
+		{
+			//getting all bid of this user
+			$bids = $this->manage_content->getValueWhere_descending("bid_info","*","user_id",$user_id);
+			if(!empty($bids[0]))
+			{
+				foreach($bids as $bid)
+				{
+					//getting project details of that bid
+					$project_details = $this->manage_content->getValue_where("project_info","*","project_id",$bid['project_id']);
+					//getting user details
+					$user_details = $this->manage_content->getValue_where("user_info","*","user_id",$project_details[0]['user_id']);
+					//getting total no of proposal
+					$total_proposal = $this->manage_content->getRowValue("bid_info","project_id",$bid['project_id']);
+					//setting the default image
+					if(empty($user_details[0]['profile_image']))
+					{
+						$profile_image = 'img/thumb64-80-1413559917-vasu_naman.jpg';
+					}
+					else
+					{
+						$profile_image = $user_details[0]['profile_image'];
+					}
+					//showing all the details
+					echo '<div class="col-md-12 find_job_part">
+							<div class="col-md-1"><img src="'.$profile_image.'" class="profile_image"/></div>
+							<div class="col-md-9">
+								<h4 class="job_title">'.$project_details[0]['project_name'].'</h4>
+								<p>'.$project_details[0]['project_description'].'</p>
+								<p class="col-md-4 project_description_skills"><span class="project_description_topic">Total Proposal</span>: '.$total_proposal.'</p>
+								<p class="col-md-4"><span class="project_description_topic">Price</span>: '.$bid['price'].'</p>
+								<p><a href="#">Client Info</a></p>
+								<p class="col-md-12 project_description_skills"><span class="project_description_topic">You have submitted the proposal on '.$bid['date'].'</span></p>
+							</div>
+						</div>';
+				}
+			}
+			else
+			{
+				echo '<p style="font-size:1.5em; color:#ff0000; text-align:center;">No Job Details Found</p>';
+			}
+		}
+		
+		/*
+		 method for getting user bid id
+		 Auth: Dipanjan
+		*/
+		function getBidId($project_id,$user_id)
+		{
+			//getting bid id of this project_id and this user id
+			$bid_id = $this->manage_content->getValue_twoCoditions("bid_info","*","project_id",$project_id,"user_id",$user_id);
+			if(!empty($bid_id[0]))
+			{
+				return $bid_id[0]['bid_id'];
+			}
+			else
+			{
+				return null;
+			}
+		}
+		
+		/*
+		 method for getting bid details for updating it
+		 Auth: Dipanjan
+		*/
+		function getBidDescription($bid_id)
+		{
+			//getting bidding details
+			$bid_details = $this->manage_content->getValue_where("bid_info","*","bid_id",$bid_id);
+			//showing the details in page
+			echo '<div class="col-lg-5">
+                	<div class="bid_outline">
+                    	<h4 class="bid_heading">Describe Your Proposal</h4>
+                        <form action="v-includes/manageData.php" method="post" enctype="multipart/form-data">
+                        	<textarea rows="20" class="bid_textarea col-md-12" name="description">'.$bid_details[0]['bid_description'].'</textarea>
+                            <p class="col-md-12 project_description_skills">Cost</p>
+                            <input type="text" class="form-control bid_text" placeholder="Cost Of this Project" name="price" value="'.$bid_details[0]['price'].'">
+                            <p class="col-md-12 project_description_skills">Time Required</p>
+                            <select class="form-control bid_select" name="time_range">
+                            	<option value="Within 3 Days"'; if($bid_details[0]['time_range'] == 'Within 3 Days'){ echo 'selected="selected"'; } echo '>Within 3 Days</option>
+								<option value="Within 1 week"'; if($bid_details[0]['time_range'] == 'Within 1 week'){ echo 'selected="selected"'; } echo '>Within 1 week</option>
+								<option value="Within 2 week"'; if($bid_details[0]['time_range'] == 'Within 2 week'){ echo 'selected="selected"'; } echo '>Within 2 week</option>
+								<option value="Within 1 month"'; if($bid_details[0]['time_range'] == 'Within 1 month'){ echo 'selected="selected"'; } echo '>Within 1 month</option>
+								<option value="Within 2 month"'; if($bid_details[0]['time_range'] == 'Within 2 month'){ echo 'selected="selected"'; } echo '>Within 2 month</option>
+								<option value="Above 2 month"'; if($bid_details[0]['time_range'] == 'Above 2 month'){ echo 'selected="selected"'; } echo '>Above 2 month</option>
+                            </select>
+                            <p class="col-md-12 project_description_skills">Attach File</p>
+                            <input type="file" name="files">
+							<input type="hidden" name="bid_id" value="'.$bid_id.'">
+							<input type="hidden" name="project_id" value="'.$bid_details[0]['project_id'].'">
+							<input type="hidden" name="action" value="update">
+                            <input type="submit" class="btn btn-success btn-lg pull-right" value="UPDATE"/>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>';
+		}
+		
+		/*
 		 method for getting valid project id valid or not
 		 Auth: Dipanjan
 		*/
-		function validProjectId($project_id){
+		function validProjectId($project_id)
+		{
 			//checking for valid project id
 			$valid_id = $this->manage_content->getValue_where("project_info","*","project_id",$project_id);
 			if(!empty($valid_id))

@@ -241,7 +241,7 @@
 		}
 		
 		/*
-		 method for insert project
+		 method for insert bid
 		 Auth: Dipanjan
 		*/
 		function insertBid($userData,$userImage,$userId)
@@ -272,6 +272,43 @@
 			//inserting values to bid info table
 			$insert = $this->manage_content->insertValue("bid_info",$column_name,$column_value);
 			return $insert;
+		}
+		
+		/*
+		 method for update bid
+		 Auth: Dipanjan
+		*/
+		function updateBid($userData,$userImage)
+		{
+			//getting bid id
+			$bid_id = $userData['bid_id'];
+			
+			if(isset($userData['description']))
+			{
+				$result = $this->manage_content->updateValueWhere("bid_info","bid_description",$userData['description'],"bid_id",$bid_id);
+			}
+			
+			if(isset($userData['price']))
+			{
+				$result = $this->manage_content->updateValueWhere("bid_info","price",$userData['price'],"bid_id",$bid_id);
+			}
+			
+			if(isset($userData['time_range']))
+			{
+				$result = $this->manage_content->updateValueWhere("bid_info","time_range",$userData['time_range'],"bid_id",$bid_id);
+			}
+			
+			//uploading files in UI layer Files folder
+			if(!empty($userImage['files']['name']))
+			{
+				//move the uploaded file to the UI Layer img folder of main image
+				$result_upload = $this->manage_fileUploader->upload_document_file($userImage['files'],'../files/');
+				//photo_name variable saves the image location
+				$file_name = "files/".$result_upload;
+				$update_file = $this->manage_content->updateValueWhere("bid_info","file_attached",$file_name,"bid_id",$bid_id);
+			}
+			
+			
 		}
 		
 		/*

@@ -34,11 +34,11 @@
 					$rowcount = $this->manage_content->getRowValue("bid_info","project_id",$job['project_id']);
 					echo '<div class="col-md-12 job_part">
 							<h3 class="job_title"><a href="post_bid.php?id='.$job['project_id'].'"> '.$job['project_name'].'</a></h3>
-							<p class="col-md-4 project_description_skills"><span class="project_description_topic">Price</span>: '.$job['price_range'].'</p>
-							<p class="col-md-4"><span class="project_description_topic">Time Remaining</span>: 3days 22hour</p>
+							<p class="col-md-4"><span class="project_description_topic">Price</span>: '.$job['price_range'].'</p>
+							
 							<p class="col-md-4"><span class="project_description_topic">Total Proposal</span>: '.$rowcount.'</p>
-							<p>'.$job['project_description'].'</p>
-							<p><span class="project_description_topic">Skills Required</span>: '.$job['skills'].'</p>
+							<p class="col-md-12">'.$job['project_description'].'</p>
+							<p class="col-md-12"><span class="project_description_topic">Skills Required</span>: '.$job['skills'].'</p>
 						</div>';
 				}
 			}
