@@ -27,6 +27,7 @@
                             <th>Date & Time</th>
                             <th>Preferred Location</th>
                             <th>File Uploaded</th>
+                            <th>Job Award</th>
                             <th>Edit Project</th>
                         </tr>
                     </thead>

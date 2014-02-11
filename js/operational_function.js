@@ -4,12 +4,13 @@
 $('#findjob_category').change(function(){
 	categoryData = $('#findjob_category').val();
 	sendingData = 'categoryValue='+categoryData+'&refData=category';
-	sendingRequest(sendingData);
+	returningPlace = '.job_list_outline';
+	sendingRequest(sendingData,returningPlace);
 
 });
 
 //method for ajax call from UI form
-function sendingRequest(sendingData){
+function sendingRequest(sendingData,returningPlace){
 	$.ajax({
 		type: "POST",
 		url:"v-includes/class.fetchData.php",
@@ -20,7 +21,15 @@ function sendingRequest(sendingData){
 		  },
 		success:function(result){
 			console.log(result);
-			$(".job_list_outline").html(result);
+			$(returningPlace).html(result);
 			return false;
 	}});
+}
+
+//code for inserting award id in project
+function getAwarded(project_id,award_id){
+	sendingData = 'project_id='+project_id+'&award_id='+award_id+'&refData=award';
+	returningPlace = '';
+	sendingRequest(sendingData,returningPlace);
+	location.reload();
 }

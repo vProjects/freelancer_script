@@ -39,6 +39,15 @@
 				{
 					$file = 'No Files';
 				}
+				//checking for job is awarded or not
+				if(empty($all_project['award_id']))
+				{
+					$status = 'Not Yet';
+				}
+				else
+				{
+					$status = 'Job Awarded';
+				}
 				echo '<tr>
 						<td><a href="project_status.php?id='.$all_project['project_id'].'">'.$all_project['project_name'].'</a></td>
 						<td>'.$all_project['project_description'].'</td>
@@ -48,6 +57,7 @@
 						<td>'.$all_project['date']." ".$all_project['time'].'</td>
 						<td>'.$all_project['preferred_location'].'</td>
 						<td>'.$file.'</td>
+						<td>'.$status.'</td>
 						<td><a href="edit_project.php?id='.$all_project['project_id'].'"><button class="btn btn-success">EDIT</button></a></td>
 					</tr>';
 			}
@@ -217,9 +227,17 @@
 											<p><span class="project_description_topic">Proposal</span>:<span class="proposal_bidder_price">'.$bid_detail['price'].'</span></p>
 											<p><a href="#"><img src="img/message.png" class="message_icon"><span class="message_text">Conversion</span></a></p>
 										</div>
-										<div class="col-md-2">
-											<a href="#"><button class="btn btn-danger btn-lg award_button">Award</button></a>
-										</div>
+										<div class="col-md-2">';
+										if(empty($project_details[0]['award_id']))
+										{
+											echo '<button class="btn btn-danger btn-lg award_button" onclick="getAwarded(\''.$project_details[0]['project_id'].'\',\''.$bid_detail['bid_id'].'\')">Award</button>';
+										}
+										else if(!empty($project_details[0]['award_id']) && $project_details[0]['award_id'] == $bid_detail['bid_id'])
+										{
+											echo '<button class="btn btn-danger btn-lg award_button">Awarded</button>';
+										}
+											
+									echo '</div>
 									</div>';
 							}
 						}
@@ -245,18 +263,30 @@
 			//getting all job list
 			$job_lists = $this->manage_content->getValue_descending("project_info","*");
 			//showing it on page
+			//initialize parameter
+			$job_visible = 0;
 			foreach($job_lists as $job_list)
 			{
-				//getting total proposal
-				$rowcount = $this->manage_content->getRowValue("bid_info","project_id",$job_list['project_id']);
-				echo '<div class="col-md-12 job_part">
-                    	<h3 class="job_title"><a href="post_bid.php?id='.$job_list['project_id'].'"> '.$job_list['project_name'].'</a></h3>
-                        <p class="col-md-4"><span class="project_description_topic">Price</span>: '.$job_list['price_range'].'</p>
-                       
-                        <p class="col-md-4"><span class="project_description_topic">Total Proposal</span>: '.$rowcount.'</p>
-                        <p class="col-md-12">'.$job_list['project_description'].'</p>
-                        <p class="col-md-12"><span class="project_description_topic">Skills Required</span>: '.$job_list['skills'].'</p>
-                    </div>';
+				//checking for job awarded or not
+				if(empty($job_list['award_id']))
+				{
+					//getting total proposal
+					$rowcount = $this->manage_content->getRowValue("bid_info","project_id",$job_list['project_id']);
+					echo '<div class="col-md-12 job_part">
+							<h3 class="job_title"><a href="post_bid.php?id='.$job_list['project_id'].'"> '.$job_list['project_name'].'</a></h3>
+							<p class="col-md-4"><span class="project_description_topic">Price</span>: '.$job_list['price_range'].'</p>
+						   
+							<p class="col-md-4"><span class="project_description_topic">Total Proposal</span>: '.$rowcount.'</p>
+							<p class="col-md-12">'.$job_list['project_description'].'</p>
+							<p class="col-md-12"><span class="project_description_topic">Skills Required</span>: '.$job_list['skills'].'</p>
+						</div>';
+					$job_visible = $job_visible + 1;
+				}	
+			}
+			//checking for no of job visible
+			if($job_visible == 0)
+			{
+				echo '<h3 style="color:#ff0000; text-align:center;">No Project List Found</h3>';
 			}
 		}
 		
@@ -376,6 +406,19 @@
 					{
 						$profile_image = $user_details[0]['profile_image'];
 					}
+					//checking for job open, closed or awarded
+					if(empty($project_details[0]['award_id']))
+					{
+						$status = 'Job Is Open';
+					}
+					else if(!empty($project_details[0]['award_id']) && $project_details[0]['award_id'] == $bid['bid_id'])
+					{
+						$status = 'Job Is Awarded To You';
+					}
+					else
+					{
+						$status = 'Job Is Closed';
+					}
 					//showing all the details
 					echo '<div class="col-md-12 find_job_part">
 							<div class="col-md-1"><img src="'.$profile_image.'" class="profile_image"/></div>
@@ -384,7 +427,7 @@
 								<p>'.$project_details[0]['project_description'].'</p>
 								<p class="col-md-4 project_description_skills"><span class="project_description_topic">Total Proposal</span>: '.$total_proposal.'</p>
 								<p class="col-md-4"><span class="project_description_topic">Price</span>: '.$bid['price'].'</p>
-								<p><a href="#">Client Info</a></p>
+								<p>'.$status.'</p>
 								<p class="col-md-12 project_description_skills"><span class="project_description_topic">You have submitted the proposal on '.$bid['date'].'</span></p>
 							</div>
 						</div>';
@@ -459,7 +502,7 @@
 		{
 			//checking for valid project id
 			$valid_id = $this->manage_content->getValue_where("project_info","*","project_id",$project_id);
-			if(!empty($valid_id))
+			if(!empty($valid_id) && empty($valid_id[0]['award_id']))
 			{
 				return 1;
 			}
