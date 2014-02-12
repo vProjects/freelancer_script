@@ -107,7 +107,7 @@
 		function getValue_twoCoditions($table_name,$value,$row_value1,$value_entered1,$row_value2,$value_entered2)
 		{
 			try{
-				$query = $this->link->query("SELECT $value from $table_name where $row_value1='$value_entered1' AND $row_value2='$value_entered2'");
+				$query = $this->link->prepare("SELECT $value from $table_name where $row_value1='$value_entered1' AND $row_value2='$value_entered2'");
 				$query->execute();
 				$rowcount = $query->rowCount();
 				if($rowcount > 0){

@@ -33,3 +33,12 @@ function getAwarded(project_id,award_id){
 	sendingRequest(sendingData,returningPlace);
 	location.reload();
 }
+
+//code for insering chat message
+function insertChatMessage(chat_id,project_id,user_id,bid_id){
+	chat_message = $('#chat_message').val();
+	sendingData = 'message='+chat_message+'&project_id='+project_id+'&chat_id='+chat_id+'&user_id='+user_id+'&bid_id='+bid_id+'&refData=chatMessage';
+	returningPlace = '#message_place';
+	sendingRequest(sendingData,returningPlace);
+	$('#chat_message').val('');
+}

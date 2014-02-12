@@ -70,6 +70,80 @@
 			$update = $this->manage_content->updateValueWhere("project_info","award_id",$award_id,"project_id",$project_id);
 			
 		}
+		
+		/*
+		 method for inserting chat message
+		 Auth: Dipanjan
+		*/
+		function insertingChatMessage($chat_id,$project_id,$user_id,$bid_id,$message)
+		{
+			//getting current date and time
+			$curdate = $this->getCurrentDate();
+			$curtime = $this->getCurrentTime();
+			//column name
+			$column_name = array('chat_id','project_id','user_id','bid_id','message','date','time');
+			//column values
+			$column_value = array($chat_id,$project_id,$user_id,$bid_id,$message,$curdate,$curtime);
+			//insertion of message
+			$insert = $this->manage_content->insertValue("chat_info",$column_name,$column_value);
+			//showing the message history
+			if($insert == 1)
+			{
+				$chat = $this->getChatDetails($chat_id);
+			}
+		}
+		
+		/*
+		 method for getting chat details list
+		 Auth: Dipanjan
+		*/
+		function getChatDetails($chat_id)
+		{
+			//get chat details
+			$chat_details = $this->manage_content->getValueWhere_descending("chat_info","*","chat_id",$chat_id);
+			//checking for empty value
+			if(!empty($chat_details[0]))
+			{
+				foreach($chat_details as $chat_detail)
+				{
+					//checking for employer or contractor user id
+					if(substr($chat_detail['user_id'],0,3) == 'EMP')
+					{
+						echo '<div class="col-md-12 message_place">
+								<div class="alert alert-info col-md-10 chat-thread">'.$chat_detail['message'].'</div> 
+								<img src="http://placehold.it/50x50/ffcdff" alt="userImage" class="img-circle col-md-2 chat-image">
+							</div>';
+					}
+					else if(substr($chat_detail['user_id'],0,3) == 'CON')
+					{
+						echo '<div class="col-md-12 message_place">
+								<img src="http://placehold.it/50x50/ffcdff" alt="userImage" class="img-circle col-md-2 chat-image">
+								 <div class="alert alert-success col-md-10 chat-thread">'.$chat_detail['message'].'</div> 
+							</div>';
+					}
+				}
+			}
+		}
+		
+		/*
+		 method for getting current date
+		 Auth: Dipanjan
+		*/
+		function getCurrentDate()
+		{
+			$date = date('y-m-d');
+			return $date;
+		}
+		
+		/*
+		 method for getting current time
+		 Auth: Dipanjan
+		*/
+		function getCurrentTime()
+		{
+			$time = time();
+			return $time;
+		}
 			
 	}
 	
@@ -90,6 +164,13 @@
 		{
 			//awarding job to given bid id
 			$award = $fetchData->awardJob($GLOBALS['_POST']['project_id'],$GLOBALS['_POST']['award_id']);
+			break;
+		}
+		//for insertion of chat message
+		case 'chatMessage':
+		{
+			//inserting the message to database
+			$chatMessage = $fetchData->insertingChatMessage($GLOBALS['_POST']['chat_id'],$GLOBALS['_POST']['project_id'],$GLOBALS['_POST']['user_id'],$GLOBALS['_POST']['bid_id'],$GLOBALS['_POST']['message']);
 			break;
 		}
 	}

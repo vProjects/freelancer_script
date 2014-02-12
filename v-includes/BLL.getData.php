@@ -218,6 +218,9 @@
 								{
 									$profile_image = $user_details[0]['profile_image'];
 								}
+								//getting chat id
+								$chat = $this->manage_content->getValue_twoCoditions("chat_info","*","project_id",$project_details[0]['project_id'],"bid_id",$bid_detail['bid_id']);
+								
 								echo '<div class="proposal_part col-md-12">
 										<div class="col-md-1"><img src="'.$profile_image.'" /></div>
 										<div class="col-md-9">
@@ -225,7 +228,7 @@
 											<p>'.$bid_detail['bid_description'].'</p>
 											<p><span class="project_description_topic">Skills</span>: HTML, CSS, PHP, .NET</p>
 											<p><span class="project_description_topic">Proposal</span>:<span class="proposal_bidder_price">'.$bid_detail['price'].'</span></p>
-											<p><a href="#"><img src="img/message.png" class="message_icon"><span class="message_text">Conversion</span></a></p>
+											<p><a href="chat.php?p_id='.$project_details[0]['project_id'].'&b_id='.$bid_detail['bid_id'].'&u_id='.$project_details[0]['user_id'].'&c_id='.$chat[0]['chat_id'].'"><img src="img/message.png" class="message_icon"><span class="message_text">Conversation</span></a></p>
 										</div>
 										<div class="col-md-2">';
 										if(empty($project_details[0]['award_id']))
@@ -397,6 +400,16 @@
 					$user_details = $this->manage_content->getValue_where("user_info","*","user_id",$project_details[0]['user_id']);
 					//getting total no of proposal
 					$total_proposal = $this->manage_content->getRowValue("bid_info","project_id",$bid['project_id']);
+					//checking for chat id
+					$chat_id = $this->manage_content->getValue_twoCoditions("chat_info","*","project_id",$bid['project_id'],"bid_id",$bid['bid_id']);
+					if(!empty($chat_id[0]['chat_id']))
+					{
+						$chat_icon = '<a href="chat.php?p_id='.$bid['project_id'].'&b_id='.$bid['bid_id'].'&u_id='.$user_id.'&c_id='.$chat_id[0]['chat_id'].'"><img src="img/message.png" class="message_icon"><span class="message_text">Conversation</span></a>';
+					}
+					else
+					{
+						$chat_icon = '';
+					}
 					//setting the default image
 					if(empty($user_details[0]['profile_image']))
 					{
@@ -429,6 +442,7 @@
 								<p class="col-md-4"><span class="project_description_topic">Price</span>: '.$bid['price'].'</p>
 								<p>'.$status.'</p>
 								<p class="col-md-12 project_description_skills"><span class="project_description_topic">You have submitted the proposal on '.$bid['date'].'</span></p>
+								<p>'.$chat_icon.'</p>
 							</div>
 						</div>';
 				}
@@ -492,6 +506,56 @@
                         </form>
                     </div>
                 </div>';
+		}
+		
+		/*
+		 method for getting chat details list
+		 Auth: Dipanjan
+		*/
+		function getChatDetails($chat_id)
+		{
+			//get chat details
+			$chat_details = $this->manage_content->getValueWhere_descending("chat_info","*","chat_id",$chat_id);
+			//checking for empty value
+			if(!empty($chat_details[0]))
+			{
+				foreach($chat_details as $chat_detail)
+				{
+					//checking for employer or contractor user id
+					if(substr($chat_detail['user_id'],0,3) == 'EMP')
+					{
+						echo '<div class="col-md-12 message_place">
+								<div class="alert alert-info col-md-10 chat-thread">'.$chat_detail['message'].'</div> 
+								<img src="http://placehold.it/50x50/ffcdff" alt="userImage" class="img-circle col-md-2 chat-image">
+							</div>';
+					}
+					else if(substr($chat_detail['user_id'],0,3) == 'CON')
+					{
+						echo '<div class="col-md-12 message_place">
+								<img src="http://placehold.it/50x50/ffcdff" alt="userImage" class="img-circle col-md-2 chat-image">
+								 <div class="alert alert-success col-md-10 chat-thread">'.$chat_detail['message'].'</div> 
+							</div>';
+					}
+				}
+			}
+		}
+		
+		/*
+		 method for getting chat_id from database
+		 Auth: Dipanjan
+		*/
+		function getChatId($project_id,$bid_id)
+		{
+			$chat_id = $this->manage_content->getValue_twoCoditions("chat_info","*","project_id",$project_id,"bid_id",$bid_id);
+			//checking for empty result
+			if(!empty($chat_id[0]['chat_id']))
+			{
+				return $chat_id[0]['chat_id'];
+			}
+			else
+			{
+				return uniqid('CHAT');
+			}
 		}
 		
 		/*

@@ -241,6 +241,12 @@ a:hover{
 }
 .chat-image {	
 }
+.chat_submit{
+	margin:0.4em 0;
+}
+#message_place{
+	font-size:1.2em;
+}
 
 /* find job page css */
 

@@ -159,7 +159,7 @@ function alertWarning(msg) {
 	document.getElementById('warning_msg').style.display = 'block';
 	var body = $("body");
 	body.animate({scrollTop:0}, '500');
-	setInterval('$( "#warning_msg" ).hide()', 5000);
+	setInterval('$( "#warning_msg" ).hide()', 1000);
 }
 
 /*
@@ -172,5 +172,5 @@ function alertSuccess(msg){
 	document.getElementById('success_msg').style.display = 'block';
 	var body = $("body");
 	body.animate({scrollTop:0}, '500');
-	setInterval('$( "#success_msg" ).hide()', 5000);
+	setInterval('$( "#success_msg" ).hide()', 1000);
 }
