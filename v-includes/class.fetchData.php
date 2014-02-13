@@ -106,19 +106,29 @@
 			{
 				foreach($chat_details as $chat_detail)
 				{
+					//getting user profile image
+					$user_info = $this->manage_content->getValue_where("user_info","*","user_id",$chat_detail['user_id']);
+					if(!empty($user_info[0]['profile_image']))
+					{
+						$profile_image = $user_info[0]['profile_image'];
+					}
+					else
+					{
+						$profile_image = 'http://placehold.it/50x50/ffcdff';
+					}
 					//checking for employer or contractor user id
 					if(substr($chat_detail['user_id'],0,3) == 'EMP')
 					{
-						echo '<div class="col-md-12 message_place">
-								<div class="alert alert-info col-md-10 chat-thread">'.$chat_detail['message'].'</div> 
-								<img src="http://placehold.it/50x50/ffcdff" alt="userImage" class="img-circle col-md-2 chat-image">
+						echo '<div class="col-md-12 message_box">
+								<textarea class="alert alert-info col-md-10 chat-thread">'.$chat_detail['message'].'</textarea> 
+								<img src="'.$profile_image.'" alt="userImage" class="img-circle col-md-2 chat-image">
 							</div>';
 					}
 					else if(substr($chat_detail['user_id'],0,3) == 'CON')
 					{
-						echo '<div class="col-md-12 message_place">
-								<img src="http://placehold.it/50x50/ffcdff" alt="userImage" class="img-circle col-md-2 chat-image">
-								 <div class="alert alert-success col-md-10 chat-thread">'.$chat_detail['message'].'</div> 
+						echo '<div class="col-md-12 message_box">
+								<img src="'.$profile_image.'" alt="userImage" class="img-circle col-md-2 chat-image">
+								 <textarea class="alert alert-success col-md-10 chat-thread">'.$chat_detail['message'].'</textarea> 
 							</div>';
 					}
 				}

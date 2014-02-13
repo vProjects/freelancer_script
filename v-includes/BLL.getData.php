@@ -179,6 +179,15 @@
 				{
 					$preferred_location = $project_details[0]['preferred_location'];
 				}
+				//checking for file attachment
+				if(!empty($project_details[0]['files']))
+				{
+					$files = $project_details[0]['files'];
+				}
+				else
+				{
+					$files = 'No Files';
+				}
 				//getting total no of proposal from database
 				$rowcount = $this->manage_content->getRowValue("bid_info","project_id",$project_id);
 				//get all the bid details of this project
@@ -192,7 +201,7 @@
 							<p class="col-md-4"><span class="project_description_topic">Price Range</span>: '.$project_details[0]['price_range'].'</p>
 							<p class="col-md-4"><span class="project_description_topic">Time Range</span>: '.$project_details[0]['time_range'].'</p>
 							<p class="col-md-4 project_description_skills"><span class="project_description_topic">Preffered Location</span>: '.$preferred_location.'</p>
-							<p class="col-md-4"><span class="project_description_topic">Uploaded File</span>: No Files</p>
+							<p class="col-md-4"><span class="project_description_topic">Uploaded File</span>: '.$files.'</p>
 							<div class="clearfix"></div>
 						</div>
 						<!-- project description ends here -->
@@ -521,19 +530,29 @@
 			{
 				foreach($chat_details as $chat_detail)
 				{
+					//getting user profile image
+					$user_info = $this->manage_content->getValue_where("user_info","*","user_id",$chat_detail['user_id']);
+					if(!empty($user_info[0]['profile_image']))
+					{
+						$profile_image = $user_info[0]['profile_image'];
+					}
+					else
+					{
+						$profile_image = 'http://placehold.it/50x50/ffcdff';
+					}
 					//checking for employer or contractor user id
 					if(substr($chat_detail['user_id'],0,3) == 'EMP')
 					{
-						echo '<div class="col-md-12 message_place">
-								<div class="alert alert-info col-md-10 chat-thread">'.$chat_detail['message'].'</div> 
-								<img src="http://placehold.it/50x50/ffcdff" alt="userImage" class="img-circle col-md-2 chat-image">
+						echo '<div class="col-md-12 message_box">
+								<textarea class="alert alert-info col-md-10 chat-thread">'.$chat_detail['message'].'</textarea> 
+								<img src="'.$profile_image.'" alt="userImage" class="img-circle col-md-2 chat-image">
 							</div>';
 					}
 					else if(substr($chat_detail['user_id'],0,3) == 'CON')
 					{
-						echo '<div class="col-md-12 message_place">
-								<img src="http://placehold.it/50x50/ffcdff" alt="userImage" class="img-circle col-md-2 chat-image">
-								 <div class="alert alert-success col-md-10 chat-thread">'.$chat_detail['message'].'</div> 
+						echo '<div class="col-md-12 message_box">
+								<img src="'.$profile_image.'" alt="userImage" class="img-circle col-md-2 chat-image">
+								 <textarea class="alert alert-success col-md-10 chat-thread">'.$chat_detail['message'].'</textarea> 
 							</div>';
 					}
 				}

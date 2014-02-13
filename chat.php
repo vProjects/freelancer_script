@@ -30,6 +30,7 @@
 						//getting the chat details
 						$chat = $manageContent->getChatDetails($c_id);
 					?>
+                    <div class="clearfix"></div>
                     </div>
                     
             		<form role="form" class="col-md-12">	

@@ -230,14 +230,19 @@ a:hover{
 }
 .chat-thread {
 	padding:1.5em 1em;
+	margin:0 0 1em 0;
+	resize:vertical;
 }
-.chat-thread:before {
+/*.chat-thread:before {
 	content: "";
 	display: block;
 	width: 0;
 	height: 0;
 	border: solid 10px;
 	border-color: transparent #d8d8d8 transparent transparent;
+}*/
+.message_box{
+	margin:0.5em 0;
 }
 .chat-image {	
 }
@@ -246,6 +251,8 @@ a:hover{
 }
 #message_place{
 	font-size:1.2em;
+	max-height:400px;
+	overflow-y:scroll;
 }
 
 /* find job page css */
