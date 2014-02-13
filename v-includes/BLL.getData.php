@@ -182,7 +182,7 @@
 				//checking for file attachment
 				if(!empty($project_details[0]['files']))
 				{
-					$files = $project_details[0]['files'];
+					$files = '<a href="'.$project_details[0]['files'].'">'.$project_details[0]['files'].'</a>';
 				}
 				else
 				{
@@ -231,7 +231,7 @@
 								//setting the default image
 								if(empty($user_details[0]['profile_image']))
 								{
-									$profile_image = 'img/thumb64-80-1413559917-vasu_naman.jpg';
+									$profile_image = 'http://placehold.it/50x50/ffcdff';;
 								}
 								else
 								{
@@ -332,6 +332,15 @@
 				{
 					$preferred_location = $project_details[0]['preferred_location'];
 				}
+				//checking for file attachment
+				if(!empty($project_details[0]['files']))
+				{
+					$files = '<a href="'.$project_details[0]['files'].'">'.$project_details[0]['files'].'</a>';
+				}
+				else
+				{
+					$files = 'No Files';
+				}
 				//getting total no of proposal from database
 				$rowcount = $this->manage_content->getRowValue("bid_info","project_id",$project_id);
 				//get all the bid details of this project
@@ -345,7 +354,7 @@
 							<p><span class="project_description_topic">Skills Required</span>: '.$project_details[0]['skills'].'</p>
 							<p><span class="project_description_topic">Price Range</span>: '.$project_details[0]['price_range'].'</p>
 							<p><span class="project_description_topic">Preffered Location</span>: '.$preferred_location.'</p>
-							<p><span class="project_description_topic">Uploaded File</span>: No Files</p>
+							<p><span class="project_description_topic">Uploaded File</span>: '.$files.'</p>
 							<div class="clearfix"></div>
 						</div>
 						<!-- project description ends here -->
@@ -365,7 +374,7 @@
 								//setting the default image
 								if(empty($user_details[0]['profile_image']))
 								{
-									$profile_image = 'img/thumb64-80-1413559917-vasu_naman.jpg';
+									$profile_image = 'http://placehold.it/50x50/ffcdff';
 								}
 								else
 								{
@@ -444,7 +453,7 @@
 					//setting the default image
 					if(empty($user_details[0]['profile_image']))
 					{
-						$profile_image = 'img/thumb64-80-1413559917-vasu_naman.jpg';
+						$profile_image = 'http://placehold.it/50x50/ffcdff';
 					}
 					else
 					{
