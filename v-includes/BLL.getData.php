@@ -216,6 +216,16 @@
 							//showing all the bids in order
 							foreach($bid_details as $bid_detail)
 							{
+								// calculating total unread message for this bid 
+								$unreadMessage = $this->manage_content->getRowValueFourCondition("chat_info","project_id",$project_id,"bid_id",$bid_detail['bid_id'],"user_id",$bid_detail['user_id'],"message_status",'');
+								if($unreadMessage != 0)
+								{
+									$message_counter = '('.$unreadMessage.')';
+								}
+								else
+								{
+									$message_counter = '';
+								}
 								//getting the user details who have bided on this project
 								$user_details = $this->manage_content->getValue_where("user_info","*","user_id",$bid_detail['user_id']);
 								//setting the default image
@@ -237,7 +247,7 @@
 											<p>'.$bid_detail['bid_description'].'</p>
 											<p><span class="project_description_topic">Skills</span>: HTML, CSS, PHP, .NET</p>
 											<p><span class="project_description_topic">Proposal</span>:<span class="proposal_bidder_price">'.$bid_detail['price'].'</span></p>
-											<p><a href="chat.php?p_id='.$project_details[0]['project_id'].'&b_id='.$bid_detail['bid_id'].'&u_id='.$project_details[0]['user_id'].'&c_id='.$chat[0]['chat_id'].'"><img src="img/message.png" class="message_icon"><span class="message_text">Conversation</span></a></p>
+											<p><a href="chat.php?p_id='.$project_details[0]['project_id'].'&b_id='.$bid_detail['bid_id'].'&u_id='.$project_details[0]['user_id'].'&c_id='.$chat[0]['chat_id'].'"><img src="img/message.png" class="message_icon"><span class="message_text">Conversation'.$message_counter.'</span></a></p>
 										</div>
 										<div class="col-md-2">';
 										if(empty($project_details[0]['award_id']))
@@ -411,9 +421,21 @@
 					$total_proposal = $this->manage_content->getRowValue("bid_info","project_id",$bid['project_id']);
 					//checking for chat id
 					$chat_id = $this->manage_content->getValue_twoCoditions("chat_info","*","project_id",$bid['project_id'],"bid_id",$bid['bid_id']);
+					
+					// calculating total unread message for this bid 
+					$unreadMessage = $this->manage_content->getRowValueFourCondition("chat_info","project_id",$bid['project_id'],"bid_id",$bid['bid_id'],"user_id",$project_details[0]['user_id'],"message_status",'');
+					if($unreadMessage != 0)
+					{
+						$message_counter = '('.$unreadMessage.')';
+					}
+					else
+					{
+						$message_counter = '';
+					}
+					
 					if(!empty($chat_id[0]['chat_id']))
 					{
-						$chat_icon = '<a href="chat.php?p_id='.$bid['project_id'].'&b_id='.$bid['bid_id'].'&u_id='.$user_id.'&c_id='.$chat_id[0]['chat_id'].'"><img src="img/message.png" class="message_icon"><span class="message_text">Conversation</span></a>';
+						$chat_icon = '<a href="chat.php?p_id='.$bid['project_id'].'&b_id='.$bid['bid_id'].'&u_id='.$user_id.'&c_id='.$chat_id[0]['chat_id'].'"><img src="img/message.png" class="message_icon"><span class="message_text">Conversation'.$message_counter.'</span></a>';
 					}
 					else
 					{
@@ -574,6 +596,28 @@
 			else
 			{
 				return uniqid('CHAT');
+			}
+		}
+		
+		/*
+		 method for updating message status
+		 Auth: Dipanjan
+		*/
+		function updateMessageStatus($chat_id,$user_id)
+		{
+			//get all values
+			$all_chat = $this->manage_content->getValue_where("chat_info","*","chat_id",$chat_id);
+			//checking for not empty values
+			if(!empty($all_chat[0]))
+			{
+				foreach($all_chat as $chat)
+				{
+					if($chat['user_id'] != $user_id && empty($chat['message_status']))
+					{
+						//update the message status value
+						$update = $this->manage_content->updateValueWhere("chat_info","message_status",1,"id",$chat['id']);
+					}
+				}
 			}
 		}
 		

@@ -70,6 +70,20 @@
 			}
 		}
 		
+		function getRowValueFourCondition($table_name,$row_value1,$value_entered1,$row_value2,$value_entered2,$row_value3,$value_entered3,$row_value4,$value_entered4)
+		{
+			try{
+				$query = $this->link->prepare("SELECT * from $table_name where $row_value1='$value_entered1' AND $row_value2='$value_entered2' AND $row_value3='$value_entered3' AND $row_value4='$value_entered4'");
+				$query->execute();
+				$rowcount = $query->rowCount();
+				return $rowcount;
+			}
+			catch(Exception $e)
+			{
+				throw "Result Not Found";
+			}
+		}
+		
 		function getValue_where($table_name,$value,$row_value,$value_entered)
 		{
 			try{
