@@ -26,6 +26,7 @@
                             <th>Time Range</th>
                             <th>Date & Time</th>
                             <th>Preferred Location</th>
+                            <th>No. of Bids</th>
                             <th>File Uploaded</th>
                             <th>Job Award</th>
                             <th>Edit Project</th>

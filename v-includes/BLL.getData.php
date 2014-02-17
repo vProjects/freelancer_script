@@ -30,6 +30,8 @@
 			//printing them in table
 			foreach($all_projects as $all_project)
 			{
+				//getting no of bids
+				$bids_no = $this->manage_content->getRowValue("bid_info","project_id",$all_project['project_id']);
 				//checking for uploading files
 				if(!empty($all_project['files']))
 				{
@@ -49,13 +51,14 @@
 					$status = 'Job Awarded';
 				}
 				echo '<tr>
-						<td><a href="project_status.php?id='.$all_project['project_id'].'">'.$all_project['project_name'].'</a></td>
-						<td>'.$all_project['project_description'].'</td>
+						<td class="project_list_title"><a href="project_status.php?id='.$all_project['project_id'].'">'.$all_project['project_name'].'</a></td>
+						<td>'.substr($all_project['project_description'],0,150).'</td>
 						<td>'.$all_project['skills'].'</td>
 						<td>'.$all_project['price_range'].'</td>
 						<td>'.$all_project['time_range'].'</td>
 						<td>'.$all_project['date']." ".$all_project['time'].'</td>
 						<td>'.$all_project['preferred_location'].'</td>
+						<td>'.$bids_no.'</td>
 						<td>'.$file.'</td>
 						<td>'.$status.'</td>
 						<td><a href="edit_project.php?id='.$all_project['project_id'].'"><button class="btn btn-success">EDIT</button></a></td>
@@ -384,7 +387,7 @@
 										<div class="col-md-2"><img src="'.$profile_image.'" /></div>
 										<div class="col-md-10">
 											<h4 class="proposal_bidder_name">'.$user_details[0]['f_name']." ".$user_details[0]['l_name'].'</h4>
-											<p>'.$bid_detail['bid_description'].'</p>
+											<p>'.substr($bid_detail['bid_description'],0,150).'</p>
 											<p><span class="project_description_topic">Skills</span>: HTML, CSS, PHP, .NET</p>
 											<p><span class="project_description_topic">Proposal</span>:<span class="proposal_bidder_price">'.$bid_detail['price'].'</span></p>
 										</div>
@@ -474,9 +477,8 @@
 					}
 					//showing all the details
 					echo '<div class="col-md-12 find_job_part">
-							<div class="col-md-1"><img src="'.$profile_image.'" class="profile_image"/></div>
 							<div class="col-md-9">
-								<h4 class="job_title">'.$project_details[0]['project_name'].'</h4>
+								<h4 class="job_title"><a href="post_bid.php?id='.$bid['project_id'].'">'.$project_details[0]['project_name'].'</a></h4>
 								<p>'.$project_details[0]['project_description'].'</p>
 								<p class="col-md-4 project_description_skills"><span class="project_description_topic">Total Proposal</span>: '.$total_proposal.'</p>
 								<p class="col-md-4"><span class="project_description_topic">Price</span>: '.$bid['price'].'</p>
@@ -526,9 +528,9 @@
                         <form action="v-includes/manageData.php" method="post" enctype="multipart/form-data">
                         	<textarea rows="20" class="bid_textarea col-md-12" name="description">'.$bid_details[0]['bid_description'].'</textarea>
                             <p class="col-md-12 project_description_skills">Cost</p>
-                            <input type="text" class="form-control bid_text" placeholder="Cost Of this Project" name="price" value="'.$bid_details[0]['price'].'">
+                            <input type="text" class="form-control bid_text col-md-12" placeholder="Cost Of this Project" name="price" value="'.$bid_details[0]['price'].'">
                             <p class="col-md-12 project_description_skills">Time Required</p>
-                            <select class="form-control bid_select" name="time_range">
+                            <select class="form-control bid_select col-md-12" name="time_range">
                             	<option value="Within 3 Days"'; if($bid_details[0]['time_range'] == 'Within 3 Days'){ echo 'selected="selected"'; } echo '>Within 3 Days</option>
 								<option value="Within 1 week"'; if($bid_details[0]['time_range'] == 'Within 1 week'){ echo 'selected="selected"'; } echo '>Within 1 week</option>
 								<option value="Within 2 week"'; if($bid_details[0]['time_range'] == 'Within 2 week'){ echo 'selected="selected"'; } echo '>Within 2 week</option>
@@ -537,7 +539,7 @@
 								<option value="Above 2 month"'; if($bid_details[0]['time_range'] == 'Above 2 month'){ echo 'selected="selected"'; } echo '>Above 2 month</option>
                             </select>
                             <p class="col-md-12 project_description_skills">Attach File</p>
-                            <input type="file" name="files">
+                            <input type="file" name="files" class="col-md-12">
 							<input type="hidden" name="bid_id" value="'.$bid_id.'">
 							<input type="hidden" name="project_id" value="'.$bid_details[0]['project_id'].'">
 							<input type="hidden" name="action" value="update">

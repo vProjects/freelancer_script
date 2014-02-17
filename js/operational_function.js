@@ -3,10 +3,16 @@
 // code for jquery ajax for fetching all data corresponding to selected category
 $('#findjob_category').change(function(){
 	categoryData = $('#findjob_category').val();
-	sendingData = 'categoryValue='+categoryData+'&refData=category';
-	returningPlace = '.job_list_outline';
-	sendingRequest(sendingData,returningPlace);
-
+	if(categoryData == 'all_jobs')
+	{
+		location.reload();
+	}
+	else
+	{
+		sendingData = 'categoryValue='+categoryData+'&refData=category';
+		returningPlace = '.job_list_outline';
+		sendingRequest(sendingData,returningPlace);
+	}
 });
 
 //method for ajax call from UI form

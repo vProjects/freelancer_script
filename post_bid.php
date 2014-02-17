@@ -42,9 +42,9 @@
                         <form action="v-includes/manageData.php" method="post" enctype="multipart/form-data">
                         	<textarea rows="20" class="bid_textarea col-md-12" name="description"></textarea>
                             <p class="col-md-12 project_description_skills">Cost</p>
-                            <input type="text" class="form-control bid_text" placeholder="Cost Of this Project" name="price">
+                            <input type="text" class="form-control bid_text col-md-12" placeholder="Cost Of this Project" name="price">
                             <p class="col-md-12 project_description_skills">Time Required</p>
-                            <select class="form-control bid_select" name="time_range">
+                            <select class="form-control bid_select col-md-12" name="time_range">
                             	<option value="Within 3 Days">Within 3 Days</option>
                                 <option value="Within 1 week">Within 1 week</option>
                                 <option value="Within 2 week">Within 2 week</option>
@@ -53,7 +53,7 @@
                                 <option value="Above 2 month">Above 2 month</option>
                             </select>
                             <p class="col-md-12 project_description_skills">Attach File</p>
-                            <input type="file" name="files">
+                            <input type="file" name="files" class="col-md-12">
                             <input type="hidden" name="project_id" value="<?php echo $project_id; ?>" />
                             <input type="hidden" name="action" value="insert" />
                             <input type="submit" class="btn btn-success btn-lg pull-right" value="SUBMIT"/>

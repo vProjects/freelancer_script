@@ -20,7 +20,13 @@
     	<div class="body_page">
         	<?php include 'v-templates/navbar.php'; ?>
             	<!-- chat box has added here -->
-                
+                <?php
+					//checking for null value of chat id
+					if(empty($c_id))
+					{
+						$c_id = $manageContent->getChatId($p_id,$b_id);
+					}
+				?>
             	<div class="col-md-8 col-md-offset-2 chat_box">
                 	<form role="form" class="col-md-12">	
                       <div class="form-group">
@@ -31,11 +37,6 @@
                 
                 	<div id="message_place" class="col-md-12">
                     <?php
-						//checking for null value of chat id
-						if(empty($c_id))
-						{
-							$c_id = $manageContent->getChatId($p_id,$b_id);
-						}
 						//getting the chat details
 						$chat = $manageContent->getChatDetails($c_id);
 						//making unread message changing to read message

@@ -158,6 +158,11 @@ a:hover{
 .project_list_table{
 	font-size:1.2em;
 }
+.project_list_title{
+	font-size:1.2em;
+	text-transform:capitalize;
+	color:#1641cc;
+}
 
 /* Project Status Page CSS */
 .project_description{

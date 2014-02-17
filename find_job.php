@@ -19,7 +19,7 @@
                     	<label class="col-md-2 control-label login_form_label">Categories</label>
                         <div class="col-md-4">
       						<select class="form-control" id="findjob_category">
-                            	<option>---Select A Category---</option>
+                            	<option value="all_jobs">All Categories</option>
                                 <option value="IT & Programming">IT & Programming</option>
                                 <option value="Design & Multimedia">Design & Multimedia</option>
                             </select>

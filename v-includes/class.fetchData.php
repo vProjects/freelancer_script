@@ -151,7 +151,7 @@
 		*/
 		function getCurrentTime()
 		{
-			$time = time();
+			$time = date('h:i:s a');
 			return $time;
 		}
 			
