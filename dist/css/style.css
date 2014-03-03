@@ -72,6 +72,9 @@ a:hover{
 	padding:0.8em 3.5em;
 	font-weight:bold;
 }
+.login_checkbox_text{
+	text-align:left !important;
+}
 .footer{
 	background-color:#535353;
 	color:#DADADA;
@@ -140,6 +143,12 @@ a:hover{
 }
 #navigation{
 	padding-left:0px;
+}
+#user_name{
+	color:#FFF;
+	font-size:1.3em;
+	font-weight:bold;
+	padding:0.8em;
 }
 #success_msg{
 	display:none;
@@ -337,5 +346,16 @@ a:hover{
 }
 .bid_proposal_submit{
 	margin:1em 0 0;
+}
+
+/* user search page css*/
+.search_textbox{
+	width:30%;
+}
+#user_search_result{
+	margin-top:1.5em;
+}
+.table_thead{
+	background-color:#C3C3C3;
 }
 

@@ -20,8 +20,10 @@
                         <div class="col-md-4">
       						<select class="form-control" id="findjob_category">
                             	<option value="all_jobs">All Categories</option>
-                                <option value="IT & Programming">IT & Programming</option>
-                                <option value="Design & Multimedia">Design & Multimedia</option>
+                                <?php 
+									//getting category list
+									$category_list = $manageContent->getCategoryList();
+								?>
                             </select>
     					</div>
                     </div>

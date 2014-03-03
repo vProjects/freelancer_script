@@ -48,7 +48,7 @@
 			if(!empty($GLOBALS['_POST']['email']) && !empty($GLOBALS['_POST']['password']))
 			{
 				//checking for valid login credentials
-				$login = $manageData->checkingLoginValues($GLOBALS['_POST']['email'],$GLOBALS['_POST']['password'],$GLOBALS['_POST']['category']);
+				$login = $manageData->checkingLoginValues($GLOBALS['_POST']['email'],$GLOBALS['_POST']['password'],$GLOBALS['_POST']['category'],$GLOBALS['_POST']['login_time']);
 				if($login[0] == 0)
 				{
 					$_SESSION['warning'] = $login[1];
@@ -130,6 +130,16 @@
 			
 			//returning to find job page
 			header("Location: ../find_job.php");
+			break;
+		}
+		
+		//for updating personal information
+		case "personal_information.php":
+		{
+			//updating personal info
+			$update_personal_info = $manageData->updatePersonalInfo($GLOBALS['_POST'],$GLOBALS['_FILES'],$_SESSION['user_id']);
+			//returning to personal information page
+			header("Location: ../personal_information.php");
 			break;
 		}
 		

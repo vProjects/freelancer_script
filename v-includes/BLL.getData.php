@@ -35,7 +35,7 @@
 				//checking for uploading files
 				if(!empty($all_project['files']))
 				{
-					$file = substr($all_project['files'],strpos($all_project['files'],"/")+1);
+					$file = $all_project['files'];
 				}
 				else
 				{
@@ -82,16 +82,10 @@
 						<div class="form-group v-form_control">
 							<label class="col-md-3 control-label login_form_label">Category</label>
 							<div class="col-md-8">
-								<input type="text" class="form-control" placeholder="Category" value="'.$project_details[0]['category'].'">
-							</div>
-						</div>
-						<div class="form-group v-form_control">
-							<label class="col-md-3 control-label login_form_label">Category</label>
-							<div class="col-md-8">
-								<select class="form-control" id="postProject_category" name="category[]" multiple="multiple">
-									<option value="IT & Programming">IT & Programming</option>
-									<option value="Design & Multimedia">Design & Multimedia</option>
-								</select>
+								<input type="text" class="form-control" placeholder="Category" value="'.$project_details[0]['category'].'" readonly="readonly">
+								<select class="form-control" id="postProject_category" name="category[]" multiple="multiple">';
+							$this->getCategoryList();		
+							echo '</select>
 							</div>
 						</div>
 						<div class="form-group v-form_control">
@@ -109,7 +103,10 @@
 						<div class="form-group v-form_control">
 							<label class="col-md-3 control-label login_form_label">Skills Required</label>
 							<div class="col-md-8">
-								<input type="text" class="form-control" placeholder="Skills Required" name="skills" value="'.$project_details[0]['skills'].'">
+								<input type="text" class="form-control" placeholder="Skills Required" value="'.$project_details[0]['skills'].'" readonly="readonly">
+								<select class="form-control" name="skills[]" multiple="multiple">';
+									$this->getSkillList();
+							echo '</select>
 							</div>
 						</div>
 						<div class="form-group v-form_control">
@@ -139,7 +136,10 @@
 						<div class="form-group v-form_control">
 							<label class="col-md-3 control-label login_form_label">Preffered Location</label>
 							<div class="col-md-8">
-								<input type="text" class="form-control" placeholder="Preffered Location" name="preferred_location" value="'.$project_details[0]['preferred_location'].'">
+								<input type="text" class="form-control" placeholder="Preffered Location" value="'.$project_details[0]['preferred_location'].'" readonly="readonly">
+								<select class="form-control" name="preferred_location[]" multiple="multiple">';
+									$this->getLocationList();
+							echo '</select>
 							</div>
 						</div>
 						<div class="form-group v-form_control">
@@ -185,7 +185,7 @@
 				//checking for file attachment
 				if(!empty($project_details[0]['files']))
 				{
-					$files = '<a href="'.$project_details[0]['files'].'">'.$project_details[0]['files'].'</a>';
+					$files = '<a href="'.$project_details[0]['updated_filename'].'" target="_blank">'.$project_details[0]['files'].'</a>';
 				}
 				else
 				{
@@ -338,7 +338,7 @@
 				//checking for file attachment
 				if(!empty($project_details[0]['files']))
 				{
-					$files = '<a href="'.$project_details[0]['files'].'">'.$project_details[0]['files'].'</a>';
+					$files = '<a href="'.$project_details[0]['updated_filename'].'" target="_blank">'.$project_details[0]['files'].'</a>';
 				}
 				else
 				{
@@ -650,6 +650,97 @@
 			}
 		}
 		
+		/*
+		 method for getting category list from database
+		 Auth: Dipanjan
+		*/
+		function getCategoryList()
+		{
+			//getting all values of category
+			$categories = $this->manage_content->getValue("category_info","*");
+			//showing it on page
+			if(!empty($categories))
+			{
+				foreach($categories as $category)
+				{
+					echo '<option value="'.$category['category'].'">'.$category['category'].'</option>';
+				}
+			}
+		}
+		
+		/*
+		 method for getting skills list from database
+		 Auth: Dipanjan
+		*/
+		function getSkillList()
+		{
+			//getting all values of category
+			$skills = $this->manage_content->getValue("skills_info","*");
+			//showing it on page
+			if(!empty($skills))
+			{
+				foreach($skills as $skill)
+				{
+					echo '<option value="'.$skill['skills'].'">'.$skill['skills'].'</option>';
+				}
+			}
+		}
+		
+		/*
+		 method for getting category list from database
+		 Auth: Dipanjan
+		*/
+		function getLocationList()
+		{
+			//getting all values of category
+			$locations = $this->manage_content->getValue("location_info","*");
+			//showing it on page
+			if(!empty($locations))
+			{
+				foreach($locations as $location)
+				{
+					echo '<option value="'.$location['location'].'">'.$location['location'].'</option>';
+				}
+			}
+		}
+		
+		/*
+		 method for getting user name
+		 Auth: Dipanjan
+		*/
+		function getUserName($user_id)
+		{
+			$user_details = $this->manage_content->getValue_where("user_info","*","user_id",$user_id);
+			return $user_details[0]['f_name']." ".$user_details[0]['l_name'];
+		}
+		
+		/*
+		 method for getting contractor personal information
+		 Auth: Dipanjan
+		*/
+		function getPersonalInfo($user_id)
+		{
+			//getting personal info
+			$user_details = $this->manage_content->getValue_where("user_info","*","user_id",$user_id);
+			//showing them in form
+			echo '<div class="form-group v-form_control">
+					<label class="col-md-3 control-label login_form_label">Skills</label>
+					<div class="col-md-8">
+						<input type="text" class="form-control" placeholder="Skills" name="skills" value="'.$user_details[0]['skills'].'">
+					</div>
+				</div>
+				<div class="form-group v-form_control">
+					<label class="col-md-3 control-label login_form_label">Upload Resume</label>
+					<div class="col-md-8">
+						<input type="file" name="resume" class="form-control" />
+					</div>
+				</div>
+				 <div class="form-group v-form_control">
+					<div class="col-md-offset-3 col-md-8">
+						<input type="submit" class="btn btn-primary login_form_submit" value="UPDATE">
+					</div>
+				</div>';
+		}
 	}
 	
 ?>

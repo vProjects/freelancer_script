@@ -1,5 +1,16 @@
 <?php
 	session_start();
+	if(isset($_COOKIE['user_login']))
+	{
+		if(substr($_COOKIE['user_login'],0,3) == 'EMP')
+		{
+			header("Location: post_project.php");
+		}
+		else if(substr($_COOKIE['user_login'],0,3) == 'CON')
+		{
+			header("Location: job_list.php");
+		}
+	}	
 	$pageTitle = 'LOGIN';
 	include 'v-templates/header.php';
 ?>
@@ -44,6 +55,12 @@
                             <div id="err_login_radio"></div>
   						</label>
 					</div>
+                    <div class="checkbox v-form_control">
+                    	<label class="col-md-10 col-md-offset-1 control-label login_form_label login_checkbox_text">
+      						<input type="radio" name="login_time">this is not a shared computer, and stay loginned for 2 weeks
+    					</label>
+                        <div class="clearfix"></div>
+                    </div>
                      <div class="form-group v-form_control">
                         <div class="col-md-offset-2 col-md-9">
       						<input type="button" class="btn btn-danger pull-right login_form_submit" value="LOGIN" onclick="validateLoginForm('login_form');">

@@ -1,0 +1,36 @@
+                 
+  <table class=\"table table-hover\">
+                          <caption>Your Investment with Us</caption>
+                          <thead>
+                            <tr>
+                              
+                              <th>Plan Name</th>
+                              <th>Advisor Id</th>
+                              <th>Payment Method</th>
+                              <th>Initial Premium</th>
+                              <th>Policy Duration</th>
+                              <th>Amount Details</th>
+                              <th>Check No.</th>
+                              <th>Issuing Bank(Branch Name)</th>
+                              <th>Date</th>
+                             <th>MICR No.</th>
+                             
+                            </tr>
+                          </thead>
+                                                     <tbody>
+                            <tr>
+                              <td>life_insurance</td>
+                              <td>adv1111</td>
+                              <td>regular_premium</td>
+                              <td>Rs. 61,152</td>
+                              <td>5_10_year</td>
+                              <td></td>
+                              <td>none</td>
+                              <td>()</td>
+                              <td>0000-00-00</td>
+                              <td></td>
+                            
+                            </tr>
+                          </tbody>
+                                               </table>
+            

@@ -19,6 +19,7 @@
 					if(isset($project_id))
 					{
 						$project_details = $manageContent->getProjectDetails($project_id);
+						
 					}
 					else
 					{

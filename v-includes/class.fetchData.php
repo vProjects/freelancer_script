@@ -94,6 +94,19 @@
 		}
 		
 		/*
+		 method for reloading chat details after every time interval
+		 Auth: Dipanjan
+		*/
+		function getChatReload($chat_id,$user_id)
+		{
+			if(!empty($chat_id) && !empty($user_id))
+			{
+				$chat = $this->getNewChatDetails($chat_id);
+				$update = $this->updateMessageStatus($chat_id,$user_id);
+			}
+		}
+		
+		/*
 		 method for getting chat details list
 		 Auth: Dipanjan
 		*/
@@ -133,6 +146,155 @@
 					}
 				}
 			}
+		}
+		
+		/*
+		 method for getting new chat details
+		 Auth: Dipanjan
+		*/
+		function getNewChatDetails($chat_id)
+		{
+			//get chat details
+			$chat_details = $this->manage_content->getValueWhere_descending("chat_info","*","chat_id",$chat_id);
+			//checking for empty value
+			if(!empty($chat_details[0]))
+			{
+				foreach($chat_details as $chat_detail)
+				{
+					if($chat_detail['message_status'])
+					{
+					}
+					//getting user profile image
+					$user_info = $this->manage_content->getValue_where("user_info","*","user_id",$chat_detail['user_id']);
+					if(!empty($user_info[0]['profile_image']))
+					{
+						$profile_image = $user_info[0]['profile_image'];
+					}
+					else
+					{
+						$profile_image = 'http://placehold.it/50x50/ffcdff';
+					}
+					//checking for employer or contractor user id
+					if(substr($chat_detail['user_id'],0,3) == 'EMP' && $chat_detail['message_status'] == 0)
+					{
+						echo '<div class="col-md-12 message_box">
+								<textarea class="alert alert-info col-md-10 chat-thread">'.$chat_detail['message'].'</textarea> 
+								<img src="'.$profile_image.'" alt="userImage" class="img-circle col-md-2 chat-image">
+							</div>';
+					}
+					else if(substr($chat_detail['user_id'],0,3) == 'CON' && $chat_detail['message_status'] == 0)
+					{
+						echo '<div class="col-md-12 message_box">
+								<img src="'.$profile_image.'" alt="userImage" class="img-circle col-md-2 chat-image">
+								 <textarea class="alert alert-success col-md-10 chat-thread">'.$chat_detail['message'].'</textarea> 
+							</div>';
+					}
+				}
+			}
+		}
+		
+		/*
+		 method for updating message status
+		 Auth: Dipanjan
+		*/
+		function updateMessageStatus($chat_id,$user_id)
+		{
+			//get all values
+			$all_chat = $this->manage_content->getValue_where("chat_info","*","chat_id",$chat_id);
+			//checking for not empty values
+			if(!empty($all_chat[0]))
+			{
+				foreach($all_chat as $chat)
+				{
+					if($chat['user_id'] != $user_id && empty($chat['message_status']))
+					{
+						//update the message status value
+						$update = $this->manage_content->updateValueWhere("chat_info","message_status",1,"id",$chat['id']);
+					}
+				}
+			}
+		}
+		
+		/*
+		 method for searching user details
+		 Auth: Dipanjan
+		*/
+		function getUserDetails($search_element,$user_id)
+		{
+			//echo $search_element;
+			//get all the possible value
+			$user_details = $this->manage_content->getValue_likely("user_info","*","f_name",$search_element);
+			//print_r($user_details);
+			//set the searching category
+			if(substr($user_id,0,3) == 'EMP')
+			{
+				$category = 'contractor';
+				if(!empty($user_details[0]))
+				{
+					echo '<table class="table table-bordered project_list_table">
+							<thead class="table_thead">
+								<tr>
+									<th>User Id</th>
+									<th>Name</th>
+									<th>Email Id</th>
+									<th>Contact No</th>
+									<th>Skills</th>
+									<th>Resume</th>
+								</tr>
+							</thead>
+							<tbody>';
+					//showing them in table
+					foreach($user_details as $user_detail)
+					{
+						if($user_detail['category'] == $category)
+						{
+							echo '<tr>
+									<td>'.$user_detail['user_id'].'</td>
+									<td>'.$user_detail['f_name'].' '.$user_detail['l_name'].'</td>
+									<td>'.$user_detail['email_id'].'</td>
+									<td>'.$user_detail['contact_no'].'</td>
+									<td>'.$user_detail['skills'].'</td>
+									<td><a href="'.$user_detail['resume'].'">Download It</a></td>
+								</tr>';
+						}
+					}
+					echo '</tbody>
+                		</table>';
+				}
+			}
+			else if(substr($user_id,0,3) == 'CON')
+			{
+				$category = 'employer';
+				if(!empty($user_details[0]))
+				{
+					echo '<table class="table table-bordered project_list_table">
+							<thead class="table_thead">
+								<tr>
+									<th>User Id</th>
+									<th>Name</th>
+									<th>Email Id</th>
+									<th>Contact No</th>
+								</tr>
+							</thead>
+							<tbody>';
+					//showing them in table
+					foreach($user_details as $user_detail)
+					{
+						if($user_detail['category'] == $category)
+						{
+							echo '<tr>
+									<td>'.$user_detail['user_id'].'</td>
+									<td>'.$user_detail['f_name'].' '.$user_detail['l_name'].'</td>
+									<td>'.$user_detail['email_id'].'</td>
+									<td>'.$user_detail['contact_no'].'</td>
+								</tr>';
+						}
+					}
+					echo '</tbody>
+                		</table>';
+				}	
+			}
+			
 		}
 		
 		/*
@@ -181,6 +343,18 @@
 		{
 			//inserting the message to database
 			$chatMessage = $fetchData->insertingChatMessage($GLOBALS['_POST']['chat_id'],$GLOBALS['_POST']['project_id'],$GLOBALS['_POST']['user_id'],$GLOBALS['_POST']['bid_id'],$GLOBALS['_POST']['message']);
+			break;
+		}
+		//for reload chat page after every intrval
+		case 'reloadChat':
+		{
+			$reloadChatMessage = $fetchData->getChatReload($GLOBALS['_POST']['chat_id'],$GLOBALS['_POST']['user_id']);
+			break;
+		}
+		//for user details search
+		case 'user_search':
+		{
+			$user_details = $fetchData->getUserDetails($GLOBALS['_POST']['search_name'],$GLOBALS['_POST']['user_id']);
 			break;
 		}
 	}

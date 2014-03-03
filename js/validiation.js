@@ -117,7 +117,6 @@ function validateSignupForm(form_name)
 {
 	validateRequiredField('signup_name','err_signup_name');
 	validateRequiredField('signup_lname','err_signup_lname');
-	validateRequiredField('calender_date','err_calender_date');
 	validiateRadio('signup_male','signup_female','err_gender');
 	validateEmail('signup_email');
 	checkResult('err_signup_email');

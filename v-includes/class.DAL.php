@@ -118,6 +118,20 @@
 			}
 		}
 		
+		function getValueTwoColumn($table_name,$value,$row1,$row2,$valueSearch)
+		{
+			$query = $this->link->prepare("SELECT $value FROM $table_name WHERE MATCH ($row1,$row2) AGAINST ('%$valueSearch%' IN BOOLEAN MODE)");
+			$query->execute();
+			$rowcount = $query->rowCount();
+			if($rowcount > 0){
+				$result = $query->fetchAll(PDO::FETCH_ASSOC);
+				return $result;
+			}
+			else{
+				return $rowcount;
+			}
+		}
+		
 		function getValue_twoCoditions($table_name,$value,$row_value1,$value_entered1,$row_value2,$value_entered2)
 		{
 			try{

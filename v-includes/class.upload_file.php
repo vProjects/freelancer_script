@@ -23,9 +23,9 @@ class FileUpload{
 	/**
 	* function to add files to folder
 	*/
-	public function upload_document_file($input_name,$path){
+	public function upload_document_file($filename_desired,$input_name,$path){
 		$this->upload_path = $path;
-		$uploaded = $this->fileUploaderDocuments($this->upload_path,$input_name);
+		$uploaded = $this->fileUploaderDocuments($filename_desired,$this->upload_path,$input_name);
 		return $uploaded;	
 	}
 		
@@ -64,10 +64,10 @@ class FileUpload{
 	* function responsible to upload a file to specified directory it takes argument filename and the location where the file 
 	* will be stored and it is for all kind of file types
 	*/
-	public function fileUploaderDocuments($location,$input_name){
+	public function fileUploaderDocuments($filename_desired,$location,$input_name){
 		$filename = $input_name['name'];
 		$ext = substr($filename,strpos($filename,'.'),4);
-		$filename_desired = substr($filename,0,strpos($filename,'.'));
+		//$filename_desired = substr($filename,0,strpos($filename,'.'));
 		
 		/*if(!in_array($ext,$this->allowed_documents_filetypes)){
 			$this->error = 'The file you attempted to upload is not allowed';

@@ -41,7 +41,7 @@
 <script type="text/javascript">
 	$(function() {
 	  $( "#calender_date" ).datepicker();
-	  $( "#calender_date" ).datepicker("option", "dateFormat","yy-mm-dd");
+	  $( "#calender_date" ).datepicker("option", "dateFormat","yy");
 	 });
 </script>
 <?php

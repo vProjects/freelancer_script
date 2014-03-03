@@ -1,0 +1,45 @@
+Array
+(
+    [0] => Array
+        (
+            [id] => 16
+            [browsername] => Default Browser
+            [ip] => ::1
+            [category] => Asesores en Internet S.A.S.
+            [date] => 2013-08-30
+            [time] => 00:00:00
+        )
+
+    [1] => Array
+        (
+            [id] => 17
+            [browsername] => Default Browser
+            [ip] => ::1
+            [category] => Asesores en Internet S.A.S.
+            [date] => 2013-08-30
+            [time] => 00:00:00
+        )
+
+    [2] => Array
+        (
+            [id] => 18
+            [browsername] => Default Browser
+            [ip] => ::1
+            [category] => Asesores en Internet S.A.S.
+            [date] => 2013-08-30
+            [time] => 00:00:00
+        )
+
+    [3] => Array
+        (
+            [id] => 19
+            [browsername] => Default Browser
+            [ip] => ::1
+            [category] => Asesores en Internet S.A.S.
+            [date] => 2013-08-30
+            [time] => 00:00:00
+        )
+
+)
+
+

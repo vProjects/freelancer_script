@@ -31,11 +31,14 @@
                 	<form role="form" class="col-md-12">	
                       <div class="form-group">
                         <textarea rows="2" class="form-control" placeholder="please fill the placeholder" id="chat_message"></textarea>
+                        <input type="hidden" id="chat_id" value="<?php echo $c_id ?>" />
+                        <input type="hidden" id="user_id" value="<?php echo $u_id ?>" />
                         <input type="button" class="btn btn-danger pull-right chat_submit" value="Send" onclick="insertChatMessage(<?php echo "'".$c_id."','".$p_id."','".$u_id."','".$b_id."'"; ?>)"/>
                       </div>
                     </form>
                 
                 	<div id="message_place" class="col-md-12">
+                    	
                     <?php
 						//getting the chat details
 						$chat = $manageContent->getChatDetails($c_id);

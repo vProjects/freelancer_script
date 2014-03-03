@@ -48,3 +48,57 @@ function insertChatMessage(chat_id,project_id,user_id,bid_id){
 	sendingRequest(sendingData,returningPlace);
 	$('#chat_message').val('');
 }
+
+//code for user details search
+function userDetailsSearch(user_id){
+	search_name = $('#user_search_element').val();
+	sendingData = 'search_name='+search_name+'&user_id='+user_id+'&refData=user_search';
+	returningPlace = '#user_search_result';
+	sendingRequest(sendingData,returningPlace);	
+}
+
+//code for reloading chat page after certain page
+$(document).ready(function() {
+    chat_id = $('#chat_id').val();
+	user_id = $('#user_id').val();
+	//executing the page if there is chat page
+	var pageUrl = (window.location.pathname);
+	var pos = pageUrl.lastIndexOf("/");
+	var pageName = pageUrl.substring(pos+1);
+	if(pageName == 'chat.php')
+	{
+		//setting interval for execution the code for every 5seconds
+		setInterval(function() {
+			sendingData = '&chat_id='+chat_id+'&user_id='+user_id+'&refData=reloadChat';
+			returningPlace = '';
+			result = sendingRequest(sendingData,returningPlace);
+			//jquery ajax function calling
+			$.ajax({
+				type: "POST",
+				url:"v-includes/class.fetchData.php",
+				data: sendingData,
+				beforeSend:function(){
+					// this is where we append a loading image
+					$('').html('');
+				  },
+				success:function(result){
+					if(result != '')
+					{
+						//getting old and new message
+						oldData = $('#message_place .message_box:first-child').html();
+						newData = $(result+'.message_box:first-child').html()
+						if(oldData != newData)
+						{
+							console.log(result);
+							$(returningPlace).html(result);
+							//append the result in the top of chat history
+							$('#message_place').prepend(result);
+							return false;
+						}
+					}
+					
+			}});
+		},10000);
+	}	
+});
+

@@ -21,8 +21,10 @@
                         <div class="col-md-8">
       						<select class="form-control" id="postProject_category" name="category[]" multiple="multiple">
                             	
-                                <option value="IT & Programming">IT & Programming</option>
-                                <option value="Design & Multimedia">Design & Multimedia</option>
+                                <?php 
+									//getting category list
+									$category_list = $manageContent->getCategoryList();
+								?>
                             </select>
                             <div id="err_postProject_category"></div>
     					</div>
@@ -44,7 +46,13 @@
                     <div class="form-group v-form_control">
                     	<label class="col-md-3 control-label login_form_label">Skills Required</label>
                         <div class="col-md-8">
-      						<input type="text" class="form-control" placeholder="Skills Required" id="postProject_skills" name="skills">
+                            <select class="form-control" id="postProject_skills" name="skills[]" multiple="multiple">
+                            	
+                                <?php 
+									//getting category list
+									$category_list = $manageContent->getSkillList();
+								?>
+                            </select>
                             <div id="err_postProject_skills"></div>
     					</div>
                     </div>
@@ -76,7 +84,13 @@
                     <div class="form-group v-form_control">
                     	<label class="col-md-3 control-label login_form_label">Preffered Location</label>
                         <div class="col-md-8">
-      						<input type="text" class="form-control" placeholder="Preffered Location" name="preferred_location">
+                            <select class="form-control" name="preferred_location[]" multiple="multiple">
+                            	
+                                <?php 
+									//getting category list
+									$category_list = $manageContent->getLocationList();
+								?>
+                            </select>
     					</div>
                     </div>
                     <div class="form-group v-form_control">
