@@ -741,6 +741,36 @@
 					</div>
 				</div>';
 		}
+		
+		function getUserInfo($user_id)
+		{
+			//getting personal info
+			$user_details = $this->manage_content->getValue_where("user_info","*","user_id",$user_id);
+			//showing them in form
+			echo '<div class="form-group v-form_control">
+					<label class="col-md-3 control-label login_form_label">My Skills:</label>
+					<div class="col-md-8">
+						<h3 class="personal_skill">'.$user_details[0]['skills'].'</h3>
+						
+					</div>
+				</div>
+				<div class="form-group v-form_control">
+					<label class="col-md-3 control-label login_form_label">My Resume</label>
+					<div class="col-md-8">
+						<a href="'.$user_details[0]['resume'].'" class="personal_resume" ><h3>'.$user_details[0]['resume'].'</h3></a>
+					</div>
+				</div>
+				 <div class="form-group v-form_control">
+					<div class="col-md-offset-3 col-md-8">
+						<a href="personal_information.php"><input type="button" class="btn btn-primary login_form_submit" value="UPDATE"></a>
+					</div>
+				</div>';
+		}
+		
 	}
+
+	
+
+
 	
 ?>

@@ -26,13 +26,15 @@
                             <div id="err_signup_lname"></div>
     					</div>
                     </div>
+                    <!--
                     <div class="form-group v-form_control">
-                    	<label class="col-md-3 control-label login_form_label">Date Of Birth</label>
-                        <div class="col-md-8">
-      						<input type="text" class="form-control" placeholder="Only Birth Year" id="calender_date" name="dob">
-                            <div id="err_calender_date"></div>
-    					</div>
-                    </div>
+                                            <label class="col-md-3 control-label login_form_label">Date Of Birth</label>
+                                            <div class="col-md-8">
+                                                  <input type="text" class="form-control" placeholder="Only Birth Year" id="calender_date" name="dob">
+                                                <div id="err_calender_date"></div>
+                                            </div>
+                                        </div>-->
+                    
                     <div class="form-group v-form_control">
                     	<label class="col-md-3 control-label login_form_label">Gender</label>
   						<label class="col-md-4 login_form_label">

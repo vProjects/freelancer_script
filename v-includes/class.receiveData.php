@@ -72,9 +72,9 @@
 				//encript the password
 				$password = md5($userData['password']);
 				//creating the column name array
-				$column_name = array("user_id","f_name","l_name","email_id","dob","gender","contact_no","username","password","address","joining_date","joining_time","joining_ip","browser_name","profile_image","category");
+				$column_name = array("user_id","f_name","l_name","email_id","gender","contact_no","username","password","address","joining_date","joining_time","joining_ip","browser_name","profile_image","category");
 				//creating table value
-				$values = array($user_id,$userData['f_name'],$userData['l_name'],$userData['email'],$userData['dob'],$userData['gender'],$userData['contact_no'],$username,$password,$userData['address'],$curdate,$curtime,$ip_address,$browser_name,$photo_name,$userData['category']);
+				$values = array($user_id,$userData['f_name'],$userData['l_name'],$userData['email'],$userData['gender'],$userData['contact_no'],$username,$password,$userData['address'],$curdate,$curtime,$ip_address,$browser_name,$photo_name,$userData['category']);
 				
 				//inserting user values to database user_info table
 				$insert = $this->manage_content->insertValue("user_info",$column_name,$values);

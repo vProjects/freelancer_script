@@ -24,7 +24,8 @@
                 
                 <li <?php if($pageTitle == 'JOB LIST'){ echo 'class="navigation_active"';} ?>><a href="job_list.php">Job List</a></li>
                 <li <?php if($pageTitle == 'FIND JOB'){ echo 'class="navigation_active"';} ?>><a href="find_job.php">Find Jobs</a></li>
-                <li <?php if($pageTitle == 'PERSONAL INFO'){ echo 'class="navigation_active"';} ?>><a href="personal_information.php">Personal Information</a></li>
+                <li <?php if($pageTitle == 'PERSONAL DETAILS'){ echo 'class="navigation_active"';} ?>><a href="personal_infolist.php">Personal Information</a></li>
+                <li <?php if($pageTitle == 'EDIT INFO'){ echo 'class="navigation_active"';} ?>><a href="personal_information.php">Edit Information</a></li>
                 <li <?php if($pageTitle == 'USER SEARCH'){ echo 'class="navigation_active"';} ?>><a href="user_search.php">Employer Search</a></li>
                 <?php } ?>
                 

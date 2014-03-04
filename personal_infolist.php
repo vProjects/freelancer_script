@@ -5,7 +5,7 @@
 	{
 		header("Location: index.php");
 	}
-	$pageTitle = 'EDIT INFO';
+	$pageTitle = 'PERSONAL DETAILS';
 	include 'v-templates/header.php';
 ?>
 <!-- body starts here -->
@@ -17,7 +17,7 @@
             	<form action="v-includes/manageData.php" class="form-horizontal" method="post" enctype="multipart/form-data">
                 	<h3 class="form_heading">Personal Information</h3>
                 	<?php
-						$personal_info = $manageContent->getPersonalInfo($_SESSION['user_id']);
+						$personal_info = $manageContent->getUserInfo($_SESSION['user_id']);
 					?>
                 </form>
             </div>
