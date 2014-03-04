@@ -350,7 +350,14 @@ a:hover{
 
 /* user search page css*/
 .search_textbox{
-	width:30%;
+	width:30% !important;
+}
+.search_category_value{
+	text-align:center;
+	background-color:#FFF;
+}
+.user_search_submit{
+	margin-left:1em;
 }
 #user_search_result{
 	margin-top:1.5em;

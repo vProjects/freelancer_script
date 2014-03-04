@@ -51,8 +51,9 @@ function insertChatMessage(chat_id,project_id,user_id,bid_id){
 
 //code for user details search
 function userDetailsSearch(user_id){
+	search_category = $('#search_category').val();
 	search_name = $('#user_search_element').val();
-	sendingData = 'search_name='+search_name+'&user_id='+user_id+'&refData=user_search';
+	sendingData = 'search_name='+search_name+'&search_category='+search_category+'&user_id='+user_id+'&refData=user_search';
 	returningPlace = '#user_search_result';
 	sendingRequest(sendingData,returningPlace);	
 }

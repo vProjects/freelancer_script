@@ -219,11 +219,11 @@
 		 method for searching user details
 		 Auth: Dipanjan
 		*/
-		function getUserDetails($search_element,$user_id)
+		function getUserDetails($search_element,$search_category,$user_id)
 		{
 			//echo $search_element;
 			//get all the possible value
-			$user_details = $this->manage_content->getValue_likely("user_info","*","f_name",$search_element);
+			$user_details = $this->manage_content->getValue_likely("user_info","*",$search_category,$search_element);
 			//print_r($user_details);
 			//set the searching category
 			if(substr($user_id,0,3) == 'EMP')
@@ -354,7 +354,7 @@
 		//for user details search
 		case 'user_search':
 		{
-			$user_details = $fetchData->getUserDetails($GLOBALS['_POST']['search_name'],$GLOBALS['_POST']['user_id']);
+			$user_details = $fetchData->getUserDetails($GLOBALS['_POST']['search_name'],$GLOBALS['_POST']['search_category'],$GLOBALS['_POST']['user_id']);
 			break;
 		}
 	}

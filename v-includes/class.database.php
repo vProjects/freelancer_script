@@ -2,9 +2,9 @@
 	
 	class dbConnection{
 		protected $db_conn;
-		public $db_name = "galacrik_script" ;
+		public $db_name = "freelancer_script" ;
 		public $db_username = "root" ;
-		public $db_password = "" ;
+		public $db_password = "root" ;
 		public $db_host = "localhost" ;
 		
 		function connect(){
