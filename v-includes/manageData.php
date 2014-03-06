@@ -18,19 +18,31 @@
 			if($GLOBALS['_POST']['password'] == $GLOBALS['_POST']['confirm_password'])
 			{
 				$insert = $manageData->insertUserDetails($GLOBALS['_POST'],$GLOBALS['_FILES']);
-				if($insert == 1)
+				if($insert[0] == 1)
 				{
 					$_SESSION['success'] = 'Registration Successfull';
+					$_SESSION['user'] = $insert[2];
+					$_SESSION['user_id'] = $insert[1];
+					//checking for employer or contractor login
+					if($insert[2] == 'employer')
+					{
+						header("Location: ../post_project.php");
+					}
+					else if($insert[2] == 'contractor')
+					{
+						header("Location: ../job_list.php");
+					}
 				}
-				elseif($insert == 'Email Id Exists!!')
+				elseif($insert[0] == 'Email Id Exists!!')
 				{
-					$_SESSION['warning'] = 'Email Id Exists!!';
+					$_SESSION['warning'] = $insert[0];
+					header("Location: ../sign_up.php");
 				}
-				elseif($insert == 0)
+				elseif($insert[0] == 'Registration Unsuccessfull!!')
 				{
-					$_SESSION['warning'] = 'Registration Unsuccessfull';
+					$_SESSION['warning'] = $insert[0];
+					header("Location: ../sign_up.php");
 				}
-				header("Location: ../sign_up.php");
 				
 			}
 			else
@@ -139,7 +151,7 @@
 			//updating personal info
 			$update_personal_info = $manageData->updatePersonalInfo($GLOBALS['_POST'],$GLOBALS['_FILES'],$_SESSION['user_id']);
 			//returning to personal information page
-			header("Location: ../personal_information.php");
+			header("Location: ../job_list.php");
 			break;
 		}
 		

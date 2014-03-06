@@ -78,11 +78,19 @@
 				
 				//inserting user values to database user_info table
 				$insert = $this->manage_content->insertValue("user_info",$column_name,$values);
-				return $insert;	
+				//return $insert;
+				if($insert == 1)
+				{
+					return array($insert,$user_id,$userData['category']);
+				}
+				else
+				{
+					return array('Registration Unsuccessfull!!');
+				}
 			}
 			else
 			{
-				return 'Email Id Exists!!';
+				return array('Email Id Exists!!');
 			}
 		}
 		
